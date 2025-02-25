@@ -1,6 +1,6 @@
 import { extendTheme } from "@mui/joy/styles";
 import { TbChevronDown } from "react-icons/tb";
-import { Raleway, Source_Code_Pro } from "next/font/google";
+import { Raleway, Source_Code_Pro, Space_Grotesk } from "next/font/google";
 
 // Type declarations
 declare module "@mui/joy/Button" {
@@ -26,13 +26,13 @@ declare module "@mui/joy/Select" {
 }
 
 // Font initialization
-const spaceGrotesk = Raleway({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   adjustFontFallback: false,
   display: "swap",
 });
 
-const sourceCodePro = Source_Code_Pro({
+const sourceCodePro = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
 });
