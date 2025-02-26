@@ -24,6 +24,7 @@ import {
 } from "@mui/joy";
 
 import { useState, useRef, useEffect } from "react";
+
 import Image from "next/image";
 import Tab, { tabClasses } from "@mui/joy/Tab";
 import Accordion from "@mui/joy/Accordion";
@@ -99,7 +100,7 @@ export default function Home() {
           width: "1000px",
           height: "600px",
           borderRadius: "50%",
-          backgroundColor: "rgba(20, 52, 73, 0.64)",
+          backgroundColor: " rgba(52, 179, 241, 0.16)",
           filter: "blur(500px)",
           zIndex: 0,
           // Position 200px above header start
@@ -282,14 +283,34 @@ export default function Home() {
               position: "relative",
               borderRadius: "25px",
               padding: "2px",
-              background: "linear-gradient(45deg, #174B6E, #0A1E2B, #174B6E)",
-              boxShadow: "0 0 128px rgba(20, 52, 73, 0.36)",
+              background: "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
+              boxShadow: "0 0 128px rgba(52, 179, 241, 0.16)",
+              animation: "gradientAnimation 4s linear infinite",
+              backgroundSize: "300% 300%",
+              transformStyle: "preserve-3d",
+              transition:
+                "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease",
+              "@keyframes gradientAnimation": {
+                "0%": {
+                  backgroundPosition: "0% 50%",
+                },
+                "50%": {
+                  backgroundPosition: "100% 50%",
+                },
+                "100%": {
+                  backgroundPosition: "0% 50%",
+                },
+              },
+              "&:hover": {
+                transform: "perspective(800px) rotateX(3deg) rotateY(2deg)",
+                boxShadow: "0 0 128px rgba(52, 179, 241, 0.32)",
+              },
             }}
           >
             <Box
               sx={{
-                width: 818,
-                height: 526,
+                width: 802,
+                height: 521,
                 border: "8px solid #040D13",
                 borderRadius: "24px",
                 overflow: "hidden",
@@ -301,18 +322,18 @@ export default function Home() {
               <Image
                 src="/screens/Dashboard.jpg"
                 alt="Screen"
+                layout="intrinsic"
                 width={802}
-                height={510}
+                height={521}
                 style={{
                   display: "block",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  // Remove previous positioning offsets
+                  objectFit: "contain",
+                  position: "relative",
                 }}
               />
             </Box>
           </Card>
+
           <Typography level="h4" sx={{ color: "#ffffff", pt: 3 }}>
             Take control of your store today.
           </Typography>
@@ -594,14 +615,32 @@ export default function Home() {
               position: "relative",
               borderRadius: "25px",
               padding: "2px",
-              background: "linear-gradient(45deg, #14415F, #0A1E2B, #14415F)",
-              boxShadow: "0 0 128px rgba(20, 52, 73, 0.24)",
+              background: "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
+              boxShadow: "0 0 64px rgba(52, 179, 241, 0.16)",
+              animation: "gradientAnimation 6s linear infinite",
+              backgroundSize: "300% 300%",
+              transformStyle: "preserve-3d",
+              transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+              "@keyframes gradientAnimation": {
+                "0%": {
+                  backgroundPosition: "0% 50%",
+                },
+                "50%": {
+                  backgroundPosition: "100% 50%",
+                },
+                "100%": {
+                  backgroundPosition: "0% 50%",
+                },
+              },
+              "&:hover": {
+                transform: "perspective(600px) rotateX(2deg) rotateY(1deg)",
+              },
             }}
           >
             <Box
               sx={{
                 width: 628,
-                height: 399,
+                height: 408,
                 border: "8px solid #040D13",
                 borderRadius: "24px",
                 overflow: "hidden",
@@ -613,11 +652,12 @@ export default function Home() {
               <Image
                 src="/screens/Dashboard.jpg"
                 alt="Screen"
-                width={628} // Original width + border compensation
-                height={399} // Original height + border compensation
+                layout="intrinsic"
+                width={628}
+                height={408}
                 style={{
                   display: "block",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   position: "relative",
                 }}
               />
@@ -942,7 +982,7 @@ export default function Home() {
                   borderColor: "#18242E",
                   "&:hover": {
                     color: "#8696A1",
-                    bgcolor: "#18242E", // Hover color
+                    bgcolor: "#18242E !important", // Hover color
                   },
                 },
                 '& .MuiTab-root[aria-selected="true"]': {
@@ -1007,14 +1047,32 @@ export default function Home() {
                 position: "relative",
                 borderRadius: "25px",
                 padding: "2px",
-                background: "linear-gradient(45deg, #14415F, #0A1E2B, #14415F)",
-                boxShadow: "0 0 128px rgba(20, 52, 73, 0.24)",
+                background: "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
+                boxShadow: "0 0 64px rgba(52, 179, 241, 0.16)",
+                animation: "gradientAnimation 6s linear infinite",
+                backgroundSize: "300% 300%",
+                transformStyle: "preserve-3d",
+                transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                "@keyframes gradientAnimation": {
+                  "0%": {
+                    backgroundPosition: "0% 50%",
+                  },
+                  "50%": {
+                    backgroundPosition: "100% 50%",
+                  },
+                  "100%": {
+                    backgroundPosition: "0% 50%",
+                  },
+                },
+                "&:hover": {
+                  transform: "perspective(600px) rotateX(2deg) rotateY(1deg)",
+                },
               }}
             >
               <Box
                 sx={{
                   width: 628,
-                  height: 399,
+                  height: 408,
                   border: "8px solid #040D13",
                   borderRadius: "24px",
                   overflow: "hidden",
@@ -1026,11 +1084,12 @@ export default function Home() {
                 <Image
                   src="/screens/Dashboard.jpg"
                   alt="Screen"
-                  width={628} // Original width + border compensation
-                  height={399} // Original height + border compensation
+                  layout="intrinsic"
+                  width={628}
+                  height={408}
                   style={{
                     display: "block",
-                    objectFit: "cover",
+                    objectFit: "contain",
                     position: "relative",
                   }}
                 />
@@ -1057,7 +1116,7 @@ export default function Home() {
           spacing={5}
           sx={{ mt: 3, mb: 6 }}
         >
-          <Typography level="h1" sx={{ color: "#ffffff" }}>
+          <Typography level="h1" fontWeight="400" sx={{ color: "#ffffff" }}>
             How it works
           </Typography>
 
@@ -1077,11 +1136,11 @@ export default function Home() {
                 level="h1"
                 sx={{
                   fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13, #34B3F1)",
+                  background: "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   textAlign: "center",
-                  marginBottom: "-48px",
+
                   lineHeight: "0.8",
                 }}
               >
@@ -1100,10 +1159,12 @@ export default function Home() {
               </Typography>
             </Stack>
 
-            <Divider
-              orientation="vertical"
-              sx={{ height: "64px", bgcolor: "#18242E" }}
-            ></Divider>
+            <Box sx={{ alignContent: "center" }}>
+              <Divider
+                orientation="vertical"
+                sx={{ height: "64px", bgcolor: "#18242E" }}
+              />
+            </Box>
 
             <Stack
               direction="column"
@@ -1115,11 +1176,10 @@ export default function Home() {
                 level="h1"
                 sx={{
                   fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13, #34B3F1)",
+                  background: "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   textAlign: "center",
-                  marginBottom: "-48px",
                   lineHeight: "0.8",
                 }}
               >
@@ -1137,11 +1197,12 @@ export default function Home() {
                 minutes. It fits right into your workflow.
               </Typography>
             </Stack>
-
-            <Divider
-              orientation="vertical"
-              sx={{ height: "64px", bgcolor: "#18242E" }}
-            ></Divider>
+            <Box sx={{ alignContent: "center" }}>
+              <Divider
+                orientation="vertical"
+                sx={{ height: "64px", bgcolor: "#18242E" }}
+              />
+            </Box>
 
             <Stack
               direction="column"
@@ -1153,11 +1214,11 @@ export default function Home() {
                 level="h1"
                 sx={{
                   fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13, #34B3F1)",
+                  background: "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   textAlign: "center",
-                  marginBottom: "-48px",
+
                   lineHeight: "0.8",
                 }}
               >
@@ -1195,28 +1256,31 @@ export default function Home() {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ mt: 2, mb: 2, p: 2 }}
+          sx={{ mt: 2, mb: 2 }}
         >
-          <Typography level="h1" sx={{ color: "#ffffff" }}>
+          <Typography level="h1" fontWeight={400} sx={{ color: "#ffffff" }}>
             Pricing
           </Typography>
         </Stack>
-        <Grid
-          container
+        <Stack
+          direction="row"
           spacing={3}
-          columns={{ xs: 4, md: 12 }}
-          sx={{ mt: 2, mb: 2 }}
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            pt: 4,
+            pb: 4,
+          }}
         >
           {/* Card 1 */}
-          <Grid container columns={{ xs: 4, md: 12 }} sx={{ flexGrow: 1 }}>
+          <Grid container columns={{ xs: 4, md: 12 }}>
             <Card
               sx={{
                 bgcolor: "#040D13",
                 borderColor: "#18242E",
                 borderWidth: 2,
                 borderStyle: "solid",
-                width: "100%",
-                flexGrow: 1,
+                width: "440px",
                 borderRadius: "20px",
               }}
               size="lg"
@@ -1282,120 +1346,52 @@ export default function Home() {
               </Stack>
             </Card>
           </Grid>
-          <Grid container columns={{ xs: 4, md: 12 }} sx={{ flexGrow: 1 }}>
+          <Grid container columns={{ xs: 4, md: 12 }}>
             <Card
               sx={{
                 bgcolor: "#040D13",
                 borderColor: "#34B3F1",
                 borderWidth: 2,
                 borderStyle: "solid",
-                width: "100%",
-                flexGrow: 1,
-                spacing: 2,
+                width: "440px",
+
+                boxShadow: "0 0 128px rgba(52, 179, 241, 0.16)",
                 borderRadius: "20px",
-                boxShadow: "0px 0px 24px rgba(52, 179, 241, 0.36)",
               }}
               size="lg"
               variant="outlined"
             >
-              <Stack direction="column" spacing={1}>
-                <Stack direction="row" spacing={1}>
-                  <Typography sx={{ color: "#ffffff" }} level="h2">
-                    Professional
-                  </Typography>
-                  <Chip
-                    sx={{
-                      color: "#34B3F1",
-                      border: "1px solid #34B3F1",
-                      backgroundColor: "transparent",
-                      ml: 1,
-                      mr: 1,
-                    }}
-                    size="sm"
+              <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
+                <Typography
+                  sx={{ color: "#ffffff", alignItems: "center" }}
+                  level="h2"
+                >
+                  Professional
+                </Typography>
+                <Stack
+                  sx={{
+                    pl: 1,
+                    pr: 1,
+                    height: "24px !important",
+                    border: "1px solid #34B3F1",
+                    borderRadius: "20px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{ color: "#34B3F1" }}
+                    level="body-xs"
+                    fontWeight="600"
                   >
                     Best value
-                  </Chip>
-                </Stack>
-                <Typography
-                  sx={{ color: "#ffffff", mr: "auto" }}
-                  level="title-lg"
-                >
-                  5.990€{" "}
-                  <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
-                    / month
                   </Typography>
-                </Typography>
-                <Divider
-                  inset="none"
-                  sx={{
-                    Color: "#18242E",
-                  }}
-                />
+                </Stack>
               </Stack>
-              <Stack direction="column" spacing={3}>
-                <List
-                  size="sm"
-                  sx={{
-                    backgroundColor: "#040D13",
-                    color: "#ffffff",
-                    p: 0,
-                    m: 0,
-                  }}
-                >
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                </List>
-
-                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
-                  Start now
-                </Button>
-              </Stack>
-            </Card>
-          </Grid>
-          <Grid container columns={{ xs: 4, md: 12 }} sx={{ flexGrow: 1 }}>
-            <Card
-              sx={{
-                bgcolor: "#040D13",
-                borderColor: "#18242E",
-                borderWidth: 2,
-                borderStyle: "solid",
-                width: "100%",
-                flexGrow: 1,
-                borderRadius: "20px",
-              }}
-              size="lg"
-              variant="outlined"
-            >
-              <Typography sx={{ color: "#ffffff" }} level="h2">
-                Entreprise
-              </Typography>
               <Typography
                 sx={{ color: "#ffffff", mr: "auto" }}
                 level="title-lg"
               >
-                9.990€{" "}
+                5.990€{" "}
                 <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
                   / month
                 </Typography>
@@ -1448,7 +1444,81 @@ export default function Home() {
               </Stack>
             </Card>
           </Grid>
-        </Grid>
+          <Grid container columns={{ xs: 4, md: 12 }}>
+            <Card
+              sx={{
+                bgcolor: "#040D13",
+                borderColor: "#18242E",
+                borderWidth: 2,
+                borderStyle: "solid",
+                width: "440px",
+
+                borderRadius: "20px",
+              }}
+              size="lg"
+              variant="outlined"
+            >
+              <Typography sx={{ color: "#ffffff" }} level="h2">
+                Basic
+              </Typography>
+              <Typography
+                sx={{ color: "#ffffff", mr: "auto" }}
+                level="title-lg"
+              >
+                1.990€{" "}
+                <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
+                  / month
+                </Typography>
+              </Typography>
+              <Divider
+                inset="none"
+                sx={{
+                  Color: "#18242E",
+                }}
+              />
+              <Stack direction="column" spacing={3}>
+                <List
+                  size="sm"
+                  sx={{
+                    backgroundColor: "#040D13",
+                    color: "#ffffff",
+                    p: 0,
+                    m: 0,
+                  }}
+                >
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                </List>
+
+                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
+                  Start now
+                </Button>
+              </Stack>
+            </Card>
+          </Grid>
+        </Stack>
 
         {/* Partners Section */}
         <Stack
@@ -1709,7 +1779,7 @@ export default function Home() {
           sx={{ mb: 1, p: 1 }}
         >
           <Link
-            href="/link3"
+            href="/about"
             underline="none"
             sx={{
               color: "#8696A1",
@@ -1735,7 +1805,7 @@ export default function Home() {
             Contact us
           </Link>
           <Link
-            href="/link5"
+            href="/about"
             underline="none"
             sx={{
               color: "#8696A1",

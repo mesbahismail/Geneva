@@ -59,9 +59,15 @@ const theme = extendTheme({
               padding: "0px 12px",
               width: "fit-content",
               minWidth: "unset",
-              "&:hover": { backgroundColor: "#34B3F1" },
+              transition:
+                "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
+              "&:hover": {
+                backgroundColor: "#51C6FF",
+                boxShadow: "0 0 24px rgba(81, 198, 255, 0.24)",
+              },
               "&&": { fontWeight: 600 },
             }),
+
           ...(ownerState.color === "secondary" &&
             ownerState.variant === "outlined" && {
               border: "1px solid #444444",
