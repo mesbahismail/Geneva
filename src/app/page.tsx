@@ -36,6 +36,19 @@ import { TbCheck } from "react-icons/tb";
 import { TbPlus } from "react-icons/tb";
 
 export default function Home() {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setIsScrolled(offset > 10); // Adjust the threshold as needed
+    };
+
+    // Add event listener with passive option for better performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -77,9 +90,6 @@ export default function Home() {
       sx={{
         bgcolor: "#040D13",
         minHeight: "100vh",
-        p: 2,
-        position: "relative", // Add this
-        overflow: "hidden", // Prevent blur overflow
       }}
     >
       {/* Cover light - Positioned before header */}
@@ -89,7 +99,7 @@ export default function Home() {
           width: "1000px",
           height: "600px",
           borderRadius: "50%",
-          backgroundColor: "rgba(20, 52, 73, 0.48)",
+          backgroundColor: "rgba(20, 52, 73, 0.56)",
           filter: "blur(500px)",
           zIndex: 0,
           // Position 200px above header start
@@ -103,8 +113,7 @@ export default function Home() {
         disableGutters
         sx={{
           maxWidth: "1384px",
-          position: "relative", // Add this
-          zIndex: 1, // Ensure header stays above
+          position: "relative",
         }}
       >
         {/* Header Section */}
@@ -113,25 +122,101 @@ export default function Home() {
           justifyContent="space-between"
           alignItems="center"
           spacing={2}
+          sx={{
+            height: "72px",
+            position: "sticky",
+            top: 0,
+            backgroundColor: isScrolled
+              ? "rgba(4, 13, 19, 0.48)"
+              : "transparent",
+            backdropFilter: isScrolled ? "blur(10px)" : "none",
+            transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
+            zIndex: 1000,
+            width: "100%",
+            margin: "0 auto",
+            "&:before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: isScrolled
+                ? "rgba(4, 13, 19, 0.64)"
+                : "transparent",
+              backdropFilter: isScrolled ? "blur(10px)" : "none",
+              zIndex: -1,
+            },
+          }}
         >
           <Typography level="h2" sx={{ color: "#ffffff", mt: 2 }}>
             Geneva
           </Typography>
 
           <Stack direction="row" spacing={4}>
-            <Link href="/link1" sx={{ color: "#ffffff" }}>
+            <Link
+              href="/link1"
+              underline="none"
+              sx={{
+                color: "#8696A1",
+                fontWeight: 500,
+                "&:hover": {
+                  color: "#fff",
+                },
+              }}
+            >
               Benefits
             </Link>
-            <Link href="/link2" sx={{ color: "#ffffff" }}>
+            <Link
+              href="/link2"
+              underline="none"
+              sx={{
+                color: "#8696A1",
+                fontWeight: 500,
+                "&:hover": {
+                  color: "#fff",
+                },
+              }}
+            >
               Integrations
             </Link>
-            <Link href="/link3" sx={{ color: "#ffffff" }}>
+            <Link
+              href="/link3"
+              underline="none"
+              sx={{
+                color: "#8696A1",
+                fontWeight: 500,
+                "&:hover": {
+                  color: "#fff",
+                },
+              }}
+            >
               How it works
             </Link>
-            <Link href="/link4" sx={{ color: "#ffffff" }}>
+            <Link
+              href="/link4"
+              underline="none"
+              sx={{
+                color: "#8696A1",
+                fontWeight: 500,
+                "&:hover": {
+                  color: "#fff",
+                },
+              }}
+            >
               FAQs
             </Link>
-            <Link href="/link5" sx={{ color: "#ffffff" }}>
+            <Link
+              href="/link5"
+              underline="none"
+              sx={{
+                color: "#8696A1",
+                fontWeight: 500,
+                "&:hover": {
+                  color: "#fff",
+                },
+              }}
+            >
               Pricing
             </Link>
           </Stack>
@@ -1116,16 +1201,23 @@ export default function Home() {
             Pricing
           </Typography>
         </Stack>
-        <Grid container spacing={2} sx={{ mt: 2, mb: 2, p: 2 }}>
+        <Grid
+          container
+          spacing={3}
+          columns={{ xs: 4, md: 12 }}
+          sx={{ mt: 2, mb: 2 }}
+        >
           {/* Card 1 */}
           <Grid container columns={{ xs: 4, md: 12 }} sx={{ flexGrow: 1 }}>
             <Card
               sx={{
-                bgcolor: "#111111",
-                borderColor: "#222222",
-                borderWidth: 1,
+                bgcolor: "#040D13",
+                borderColor: "#18242E",
+                borderWidth: 2,
                 borderStyle: "solid",
                 width: "100%",
+                flexGrow: 1,
+                borderRadius: "20px",
               }}
               size="lg"
               variant="outlined"
@@ -1142,100 +1234,147 @@ export default function Home() {
                   / month
                 </Typography>
               </Typography>
-              <Divider inset="none" />
-              <List
-                size="sm"
+              <Divider
+                inset="none"
                 sx={{
-                  mx: "calc(-1 * var(--ListItem-paddingX))",
-                  color: "#ffffff",
+                  Color: "#18242E",
                 }}
-              >
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Virtual Credit Cards
-                </ListItem>
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Basic Analytics
-                </ListItem>
-              </List>
-              <CardActions>
-                <Button variant="soft" color="neutral">
+              />
+              <Stack direction="column" spacing={3}>
+                <List
+                  size="sm"
+                  sx={{
+                    backgroundColor: "#040D13",
+                    color: "#ffffff",
+                    p: 0,
+                    m: 0,
+                  }}
+                >
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                </List>
+
+                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
                   Start now
                 </Button>
-              </CardActions>
+              </Stack>
             </Card>
           </Grid>
-
-          {/* Card 2 */}
           <Grid container columns={{ xs: 4, md: 12 }} sx={{ flexGrow: 1 }}>
             <Card
               sx={{
-                bgcolor: "#111111",
-                borderColor: "#222222",
-                borderWidth: 1,
+                bgcolor: "#040D13",
+                borderColor: "#18242E",
+                borderWidth: 2,
                 borderStyle: "solid",
                 width: "100%",
+                flexGrow: 1,
+                spacing: 2,
+                borderRadius: "20px",
               }}
               size="lg"
               variant="outlined"
             >
-              <Typography sx={{ color: "#ffffff" }} level="h2">
-                Professional
-              </Typography>
-              <Typography
-                sx={{ color: "#ffffff", mr: "auto" }}
-                level="title-lg"
-              >
-                3.990€{" "}
-                <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
-                  / month
+              <Stack direction="column" spacing={1}>
+                <Typography sx={{ color: "#ffffff" }} level="h2">
+                  Professional
                 </Typography>
-              </Typography>
-              <Divider inset="none" />
-              <List
-                size="sm"
-                sx={{
-                  mx: "calc(-1 * var(--ListItem-paddingX))",
-                  color: "#ffffff",
-                }}
-              >
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Virtual Credit Cards
-                </ListItem>
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Financial Analytics
-                </ListItem>
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Checking Account
-                </ListItem>
-              </List>
-              <CardActions>
-                <Button variant="soft" color="neutral">
+                <Typography
+                  sx={{ color: "#ffffff", mr: "auto" }}
+                  level="title-lg"
+                >
+                  5.990€{" "}
+                  <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
+                    / month
+                  </Typography>
+                </Typography>
+                <Divider
+                  inset="none"
+                  sx={{
+                    Color: "#18242E",
+                  }}
+                />
+              </Stack>
+              <Stack direction="column" spacing={3}>
+                <List
+                  size="sm"
+                  sx={{
+                    backgroundColor: "#040D13",
+                    color: "#ffffff",
+                    p: 0,
+                    m: 0,
+                  }}
+                >
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                </List>
+
+                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
                   Start now
                 </Button>
-              </CardActions>
+              </Stack>
             </Card>
           </Grid>
-
-          {/* Card 3 */}
           <Grid container columns={{ xs: 4, md: 12 }} sx={{ flexGrow: 1 }}>
             <Card
               sx={{
-                bgcolor: "#111111",
-                borderColor: "#222222",
-                borderWidth: 1,
+                bgcolor: "#040D13",
+                borderColor: "#18242E",
+                borderWidth: 2,
                 borderStyle: "solid",
                 width: "100%",
+                flexGrow: 1,
+                borderRadius: "20px",
               }}
               size="lg"
               variant="outlined"
             >
               <Typography sx={{ color: "#ffffff" }} level="h2">
-                Enterprise
+                Entreprise
               </Typography>
               <Typography
                 sx={{ color: "#ffffff", mr: "auto" }}
@@ -1246,39 +1385,56 @@ export default function Home() {
                   / month
                 </Typography>
               </Typography>
-              <Divider inset="none" />
-              <List
-                size="sm"
+              <Divider
+                inset="none"
                 sx={{
-                  mx: "calc(-1 * var(--ListItem-paddingX))",
-                  color: "#ffffff",
+                  Color: "#18242E",
                 }}
-              >
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Virtual Credit Cards
-                </ListItem>
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Advanced Analytics
-                </ListItem>
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  Checking Account
-                </ListItem>
-                <ListItem sx={{ color: "#ffffff", pr: 2 }}>
-                  <TbCheck size="24" color="#8696A1" />
-                  API Integration
-                </ListItem>
-              </List>
-              <CardActions>
-                <Button variant="soft" color="neutral">
+              />
+              <Stack direction="column" spacing={3}>
+                <List
+                  size="sm"
+                  sx={{
+                    backgroundColor: "#040D13",
+                    color: "#ffffff",
+                    p: 0,
+                    m: 0,
+                  }}
+                >
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Virtual Credit Cards
+                  </ListItem>
+                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                    <TbCheck size="24" color="#8696A1" />
+                    Basic Analytics
+                  </ListItem>
+                </List>
+
+                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
                   Start now
                 </Button>
-              </CardActions>
+              </Stack>
             </Card>
           </Grid>
         </Grid>
+
         {/* Partners Section */}
         <Stack
           direction="column"
