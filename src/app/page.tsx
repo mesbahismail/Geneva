@@ -99,7 +99,7 @@ export default function Home() {
           width: "1000px",
           height: "600px",
           borderRadius: "50%",
-          backgroundColor: "rgba(20, 52, 73, 0.56)",
+          backgroundColor: "rgba(20, 52, 73, 0.64)",
           filter: "blur(500px)",
           zIndex: 0,
           // Position 200px above header start
@@ -242,7 +242,7 @@ export default function Home() {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ mb: 2, mt: 6 }}
+          sx={{ mb: 2, mt: 4 }}
         >
           <Box
             sx={{
@@ -268,10 +268,10 @@ export default function Home() {
             spacing={0.5}
             sx={{ pb: 3 }}
           >
-            <Typography level="h1" sx={{ color: "#ffffff" }}>
+            <Typography level="h1" fontWeight="400" sx={{ color: "#ffffff" }}>
               Take control of your new store
             </Typography>
-            <Typography level="h1" sx={{ color: "#34B3F1" }}>
+            <Typography level="h1" fontWeight="400" sx={{ color: "#34B3F1" }}>
               with the power of AI
             </Typography>
           </Stack>
@@ -282,8 +282,8 @@ export default function Home() {
               position: "relative",
               borderRadius: "25px",
               padding: "2px",
-              background: "linear-gradient(45deg, #14415F, #0A1E2B, #14415F)",
-              boxShadow: "0 0 128px rgba(20, 52, 73, 0.24)",
+              background: "linear-gradient(45deg, #174B6E, #0A1E2B, #174B6E)",
+              boxShadow: "0 0 128px rgba(20, 52, 73, 0.36)",
             }}
           >
             <Box
@@ -336,11 +336,11 @@ export default function Home() {
             sx={{ pt: 2 }}
           >
             <AvatarGroup>
-              <Avatar src="/public/thumb-1.jpg" alt="1" />
-              <Avatar src="/public/thumb-2.jpg" alt="2" />
-              <Avatar src="/public/thumb-3.jpg" alt="3" />{" "}
-              <Avatar src="/public/thumb-4.jpg" alt="4" />
-              <Avatar>+3</Avatar>
+              <Avatar src="/thumb-1.jpg" alt="1" />
+              <Avatar src="/thumb-2.jpg" alt="2" />
+              <Avatar src="/thumb-3.jpg" alt="3" />{" "}
+              <Avatar src="/thumb-4.jpg" alt="4" />
+              <Avatar sx={{ backgrounColor: "#0F2D3F !important" }}>+3</Avatar>
             </AvatarGroup>
           </Stack>
 
@@ -1077,7 +1077,7 @@ export default function Home() {
                 level="h1"
                 sx={{
                   fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13, #fff)",
+                  background: "linear-gradient(0deg, #040D13, #34B3F1)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   textAlign: "center",
@@ -1115,7 +1115,7 @@ export default function Home() {
                 level="h1"
                 sx={{
                   fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13, #fff)",
+                  background: "linear-gradient(0deg, #040D13, #34B3F1)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   textAlign: "center",
@@ -1153,7 +1153,7 @@ export default function Home() {
                 level="h1"
                 sx={{
                   fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13, #fff)",
+                  background: "linear-gradient(0deg, #040D13, #34B3F1)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   textAlign: "center",
@@ -1286,21 +1286,36 @@ export default function Home() {
             <Card
               sx={{
                 bgcolor: "#040D13",
-                borderColor: "#18242E",
+                borderColor: "#34B3F1",
                 borderWidth: 2,
                 borderStyle: "solid",
                 width: "100%",
                 flexGrow: 1,
                 spacing: 2,
                 borderRadius: "20px",
+                boxShadow: "0px 0px 24px rgba(52, 179, 241, 0.36)",
               }}
               size="lg"
               variant="outlined"
             >
               <Stack direction="column" spacing={1}>
-                <Typography sx={{ color: "#ffffff" }} level="h2">
-                  Professional
-                </Typography>
+                <Stack direction="row" spacing={1}>
+                  <Typography sx={{ color: "#ffffff" }} level="h2">
+                    Professional
+                  </Typography>
+                  <Chip
+                    sx={{
+                      color: "#34B3F1",
+                      border: "1px solid #34B3F1",
+                      backgroundColor: "transparent",
+                      ml: 1,
+                      mr: 1,
+                    }}
+                    size="sm"
+                  >
+                    Best value
+                  </Chip>
+                </Stack>
                 <Typography
                   sx={{ color: "#ffffff", mr: "auto" }}
                   level="title-lg"
@@ -1680,7 +1695,7 @@ export default function Home() {
           alignItems="center"
           justifyContent={"center"}
           spacing={2}
-          sx={{ mb: 2, p: 2 }}
+          sx={{ p: 2 }}
         >
           <Typography level="h1" sx={{ color: "#ffffff", mt: 2 }}>
             Geneva
@@ -1691,22 +1706,46 @@ export default function Home() {
           justifyContent="center"
           alignItems="center"
           spacing={4}
-          sx={{ mb: 2, p: 2 }}
+          sx={{ mb: 1, p: 1 }}
         >
-          <Link href="/link1" sx={{ color: "#ffffff" }}>
-            Benefits
+          <Link
+            href="/link3"
+            underline="none"
+            sx={{
+              color: "#8696A1",
+              fontWeight: 500,
+              "&:hover": {
+                color: "#fff",
+              },
+            }}
+          >
+            About us
           </Link>
-          <Link href="/link2" sx={{ color: "#ffffff" }}>
-            Integrations
+          <Link
+            href="/link4"
+            underline="none"
+            sx={{
+              color: "#8696A1",
+              fontWeight: 500,
+              "&:hover": {
+                color: "#fff",
+              },
+            }}
+          >
+            Contact us
           </Link>
-          <Link href="/link3" sx={{ color: "#ffffff" }}>
-            How it works
-          </Link>
-          <Link href="/link4" sx={{ color: "#ffffff" }}>
-            FAQs
-          </Link>
-          <Link href="/link5" sx={{ color: "#ffffff" }}>
-            Pricing
+          <Link
+            href="/link5"
+            underline="none"
+            sx={{
+              color: "#8696A1",
+              fontWeight: 500,
+              "&:hover": {
+                color: "#fff",
+              },
+            }}
+          >
+            Terms of use
           </Link>
         </Stack>
         <Stack
@@ -1716,9 +1755,27 @@ export default function Home() {
           spacing={2}
           sx={{ mb: 2, p: 2 }}
         >
-          <Typography level="body-sm" sx={{ color: "#ffffff", mt: 2 }}>
-            Designed with care by Royalz Store
-          </Typography>
+          <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+            <svg
+              width="16"
+              height="12"
+              viewBox="0 0 16 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.629 12L16 7.82713V12H11.629ZM8.0179 11.8848L8.01735 11.8843L8.0168 11.8848V11.8837L0.035456 4.15701V0L8.01735 7.72728L15.9992 0V4.15701L8.0179 11.8837V11.8848ZM0 11.9661V7.81399L4.35425 11.9661H0Z"
+                fill="white"
+              />
+            </svg>
+
+            <Typography level="body-sm" sx={{ color: "#ffffff", mt: 2 }}>
+              Designed with care by Ismail Mesbah
+            </Typography>
+          </Stack>
+
           <Typography level="body-sm" sx={{ color: "#ffffff", mt: 2 }}>
             © 2024 Geneva. All right reserved
           </Typography>
