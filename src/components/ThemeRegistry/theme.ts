@@ -2,6 +2,7 @@ import { extendTheme } from "@mui/joy/styles";
 import { accordionSummaryClasses } from "@mui/joy/AccordionSummary";
 import { TbChevronDown } from "react-icons/tb";
 import { Source_Code_Pro, Space_Grotesk } from "next/font/google";
+import type { InputOwnerState } from "@mui/joy/Input";
 
 // Type declarations
 declare module "@mui/joy/Button" {

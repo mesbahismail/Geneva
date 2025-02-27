@@ -15,11 +15,8 @@ import {
   CardContent,
   TabList,
   Tabs,
-  Chip,
-  CardActions,
   List,
   ListItem,
-  ListItemDecorator,
   Grid,
   IconButton,
 } from "@mui/joy";
@@ -59,7 +56,6 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Add this scroll-to-top function
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -72,10 +68,9 @@ export default function Home() {
   const howItWorksRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
   const pricingRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
-      const offset = 72; // Height of your sticky header
+      const offset = 72;
       const elementTop = ref.current.offsetTop - offset;
       window.scrollTo({
         top: elementTop,
@@ -83,6 +78,7 @@ export default function Home() {
       });
     }
   };
+
   React.useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;

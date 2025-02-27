@@ -201,13 +201,28 @@ export default function LoginPage() {
                       </Typography>
                     )}
                   </Stack>
-                  <Checkbox label="Keep me logged in" />
+                  <Stack
+                    direction="row"
+                    sx={{ justifyContent: "space-between" }}
+                  >
+                    <Checkbox label="Keep me logged in" />
+                    <Link
+                      component="button"
+                      underline="none"
+                      sx={{
+                        color: "#8696A1",
+                        fontWeight: 500,
+                        "&:hover": { color: "#fff" },
+                      }}
+                    >
+                      Forgot password?
+                    </Link>
+                  </Stack>
 
                   <Button
                     onClick={handleSubmit}
                     color="primary"
                     variant="solid"
-                    endDecorator={<TbChevronRight size={20} />}
                     sx={{ width: "100%" }}
                   >
                     Login
@@ -229,24 +244,25 @@ export default function LoginPage() {
                   </Typography>
                   <Box sx={{ flex: 1, height: "1px", bgcolor: "#223644" }} />
                 </Stack>
+                <Stack spacing={2}>
+                  <Button
+                    color="secondary"
+                    variant="outlined"
+                    startDecorator={<TbBrandGoogle size={20} />}
+                    sx={{ width: "100%" }}
+                  >
+                    Login with Google
+                  </Button>
 
-                <Button
-                  color="secondary"
-                  variant="outlined"
-                  startDecorator={<TbBrandGoogle size={20} />}
-                  sx={{ width: "100%" }}
-                >
-                  Login with Google
-                </Button>
-
-                <Button
-                  color="secondary"
-                  variant="outlined"
-                  startDecorator={<TbBrandX size={20} />}
-                  sx={{ width: "100%" }}
-                >
-                  Login with X
-                </Button>
+                  <Button
+                    color="secondary"
+                    variant="outlined"
+                    startDecorator={<TbBrandX size={20} />}
+                    sx={{ width: "100%" }}
+                  >
+                    Login with X
+                  </Button>
+                </Stack>
               </Stack>
             )}
           </Box>
