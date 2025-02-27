@@ -1,6 +1,7 @@
 import { extendTheme } from "@mui/joy/styles";
+import { accordionSummaryClasses } from "@mui/joy/AccordionSummary";
 import { TbChevronDown } from "react-icons/tb";
-import { Raleway, Source_Code_Pro, Space_Grotesk } from "next/font/google";
+import { Source_Code_Pro, Space_Grotesk } from "next/font/google";
 
 // Type declarations
 declare module "@mui/joy/Button" {
@@ -21,7 +22,7 @@ declare module "@mui/joy/Select" {
     solid: true;
   }
   interface SelectPropsSlots {
-    indicator: true;
+    indicator?: true;
   }
 }
 
@@ -32,7 +33,7 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-const sourceCodePro = Space_Grotesk({
+const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
   display: "swap",
 });
@@ -125,68 +126,20 @@ const theme = extendTheme({
       },
     },
 
-    JoyInput: {
-      defaultProps: {
-        color: "primary",
-        variant: "outlined",
-      },
-      styleOverrides: {
-        root: ({ ownerState }) => ({
-          borderRadius: "12px",
-          fontSize: "14px",
-          minHeight: "40px",
-          border: "1px solid #444",
-          background: "transparent",
-          padding: "8px 12px",
-          fontFamily: spaceGrotesk.style.fontFamily,
-          transition: "border-color 0.2s ease, background-color 0.2s ease",
-
-          "&:hover": {
-            borderColor: "#666",
-            backgroundColor: "transparent",
-          },
-
-          "&:focus-within": {
-            borderColor: "#aaa",
-            outline: "none",
-            boxShadow: "none",
-          },
-
-          "&::before, &::after, fieldset": {
-            border: "none",
-            outline: "none",
-            boxShadow: "none",
-          },
-
-          ...(ownerState.variant === "outlined" && {
-            "&:hover": {
-              borderColor: "#666",
-            },
-            "&:focus, &:focus-within": {
-              borderColor: "#aaa",
-            },
-          }),
-        }),
-      },
-    },
-
     JoySelect: {
       defaultProps: {
         variant: "outlined",
         color: "neutral",
-        slots: {
-          indicator: TbChevronDown,
-        },
         slotProps: {
           indicator: {
+            component: TbChevronDown,
             sx: {
               color: "#999",
               transition: "transform 0.2s ease",
               "&[data-joy-open]": {
                 transform: "rotate(-180deg)",
               },
-              // Add spacing between text and icon
-              marginLeft: "4px", // This creates the 4px gap
+              marginLeft: "4px",
             },
           },
         },
@@ -202,23 +155,19 @@ const theme = extendTheme({
           fontFamily: spaceGrotesk.style.fontFamily,
           transition: "border-color 0.2s ease, background-color 0.2s ease",
           color: "#fff",
-          // Add container spacing
           "& [class*=selectedValue]": {
             paddingRight: "8px",
             color: "#fff",
           },
-
           "&:hover": {
             borderColor: "#666",
             backgroundColor: "transparent",
           },
-
           "&:focus-within": {
             borderColor: "#aaa",
             outline: "none",
             boxShadow: "none",
           },
-
           "&::before, &::after, fieldset": {
             border: "none",
             outline: "none",
@@ -228,44 +177,11 @@ const theme = extendTheme({
       },
     },
 
-    JoyAccordion: {
-      styleOverrides: {
-        root: {
-          borderColor: "#333",
-          "&:before": { backgroundColor: "#333" },
-          // Hover for entire accordion item
-          "&:hover": {
-            borderColor: "#333",
-          },
-        },
-      },
-    },
-    JoyAccordionSummary: {
-      styleOverrides: {
-        root: {
-          color: "#fff !important",
-          fontSize: "h2",
-          fontWeight: 500,
-          "&:hover": {
-            backgroundColor: "#333", // Summary background hover
-          },
-        },
-        indicator: {
-          color: "#aaa",
-          "&:hover": {
-            color: "#333", // Arrow hover color
-            backgroundColor: "transparent",
-          },
-        },
-      },
-    },
-
     JoyList: {
       styleOverrides: {
         root: {
           "--List-padding": "8px",
           "--List-radius": "8px",
-          // Ensure list matches new background
           backgroundColor: "#000",
         },
       },
@@ -278,7 +194,7 @@ const theme = extendTheme({
           fontSize: "14px",
           padding: "8px 12px",
           "&:hover": {
-            backgroundColor: "#333", // Changed to darker hover
+            backgroundColor: "#333",
           },
           '&[aria-selected="true"]': {
             backgroundColor: "#2a2a2a",
@@ -322,18 +238,15 @@ const theme = extendTheme({
           border: "1px solid #444",
           backgroundColor: "transparent",
           color: "#fff",
-
           "&:hover": {
             borderColor: "#666",
             backgroundColor: "transparent",
           },
-
           "&:focus-within": {
             borderColor: "#aaa",
             outline: "none",
             boxShadow: "none",
           },
-
           "&::before, &::after, fieldset": {
             border: "none",
             outline: "none",

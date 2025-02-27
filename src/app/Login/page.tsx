@@ -17,7 +17,7 @@ import {
   TbChevronRight,
   TbCheck,
 } from "react-icons/tb";
-import Header from "@/components/ThemeRegistry/Header";
+import Header from "@/components/Header";
 
 export default function LoginPage() {
   const [isScrolled, setIsScrolled] = React.useState(false);

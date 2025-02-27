@@ -21,24 +21,68 @@ import {
   ListItem,
   ListItemDecorator,
   Grid,
+  IconButton,
 } from "@mui/joy";
 
 import { useState, useRef, useEffect } from "react";
-
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Tab, { tabClasses } from "@mui/joy/Tab";
 import Accordion from "@mui/joy/Accordion";
 import AccordionDetails from "@mui/joy/AccordionDetails";
 import AccordionGroup from "@mui/joy/AccordionGroup";
-import AccordionSummary from "@mui/joy/AccordionSummary";
+import AccordionSummary, {
+  accordionSummaryClasses,
+} from "@mui/joy/AccordionSummary";
 import AvatarGroup from "@mui/joy/AvatarGroup";
-import { TbBrandBluesky, TbChevronRight } from "react-icons/tb";
+import { TbArrowUp, TbBrandBluesky, TbChevronRight } from "react-icons/tb";
 import { TbCheck } from "react-icons/tb";
 import { TbPlus } from "react-icons/tb";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
+  // Add this useEffect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Add this scroll-to-top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  const router = useRouter();
+  const benefitsRef = useRef<HTMLDivElement>(null);
+  const integrationsRef = useRef<HTMLDivElement>(null);
+  const howItWorksRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const pricingRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
+    if (ref.current) {
+      const offset = 72; // Height of your sticky header
+      const elementTop = ref.current.offsetTop - offset;
+      window.scrollTo({
+        top: elementTop,
+        behavior: "smooth",
+      });
+    }
+  };
   React.useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -85,6 +129,10 @@ export default function Home() {
       currentContainer?.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
+
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
 
   return (
     <Box
@@ -156,66 +204,62 @@ export default function Home() {
 
           <Stack direction="row" spacing={4}>
             <Link
-              href="/link1"
+              component="button"
+              onClick={() => scrollToSection(benefitsRef)}
               underline="none"
               sx={{
                 color: "#8696A1",
                 fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
+                "&:hover": { color: "#fff" },
               }}
             >
               Benefits
             </Link>
             <Link
-              href="/link2"
+              component="button"
+              onClick={() => scrollToSection(featuresRef)}
               underline="none"
               sx={{
                 color: "#8696A1",
                 fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
+                "&:hover": { color: "#fff" },
+              }}
+            >
+              Features
+            </Link>
+            <Link
+              component="button"
+              onClick={() => scrollToSection(integrationsRef)}
+              underline="none"
+              sx={{
+                color: "#8696A1",
+                fontWeight: 500,
+                "&:hover": { color: "#fff" },
               }}
             >
               Integrations
             </Link>
             <Link
-              href="/link3"
+              component="button"
+              onClick={() => scrollToSection(howItWorksRef)}
               underline="none"
               sx={{
                 color: "#8696A1",
                 fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
+                "&:hover": { color: "#fff" },
               }}
             >
               How it works
             </Link>
+
             <Link
-              href="/link4"
+              component="button"
+              onClick={() => scrollToSection(pricingRef)}
               underline="none"
               sx={{
                 color: "#8696A1",
                 fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
-              }}
-            >
-              FAQs
-            </Link>
-            <Link
-              href="/link5"
-              underline="none"
-              sx={{
-                color: "#8696A1",
-                fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
+                "&:hover": { color: "#fff" },
               }}
             >
               Pricing
@@ -228,10 +272,18 @@ export default function Home() {
             alignItems="center"
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            <Button color="secondary" variant="outlined">
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={() => handleNavigation("/login")}
+            >
               Login
             </Button>
-            <Button color="primary" variant="solid">
+            <Button
+              color="primary"
+              variant="solid"
+              onClick={() => handleNavigation("/sign")}
+            >
               Get started
             </Button>
           </Stack>
@@ -381,184 +433,186 @@ export default function Home() {
           />
         </Box>
         {/* Benefits Section */}
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-          sx={{ p: 2 }}
-        >
-          <Typography level="h1" sx={{ color: "#ffffff" }}>
-            Benefits
-          </Typography>
-        </Stack>
-        <Box
-          sx={{
-            width: "100%",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+        <Box ref={benefitsRef} sx={{ py: 4 }}>
+          <Stack
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+            sx={{ p: 2 }}
+          >
+            <Typography level="h1" sx={{ color: "#ffffff" }}>
+              Benefits
+            </Typography>
+          </Stack>
+          <Box
+            sx={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
 
-            pt: 2,
-            pb: 8,
-          }}
-        >
-          <Card
-            variant="solid"
-            sx={{
-              bgcolor: "transparent",
-              borderRight: "1px solid", // Added 'solid' style
-              borderBottom: "1px solid", // Fixed property name
-              borderColor: "#18242E", // Now works as expected
-              borderRadius: "0px",
-              p: 4,
+              pt: 2,
+              pb: 8,
             }}
           >
-            <CardContent>
-              <TbBrandBluesky size="32" color="#34B3F1" />
-              <Typography
-                level="title-lg"
-                textColor="#ffffff"
-                sx={{ mt: 2.5, mb: 1 }}
-              >
-                Integrate today
-              </Typography>
-              <Typography textColor="#8696A1">
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your code with SDKs for your
-                favorite programming.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            variant="solid"
-            sx={{
-              bgcolor: "transparent",
-              borderRight: "1px solid", // Added 'solid' style
-              borderBottom: "1px solid", // Fixed property name
-              borderColor: "#18242E", // Now works as expected
-              borderRadius: "0px",
-              p: 4,
-            }}
-          >
-            <CardContent>
-              <TbBrandBluesky size="32" color="#34B3F1" />
-              <Typography
-                level="title-lg"
-                textColor="#ffffff"
-                sx={{ mt: 2.5, mb: 1 }}
-              >
-                Integrate today
-              </Typography>
-              <Typography textColor="#8696A1">
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your code with SDKs for your
-                favorite programming.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            variant="solid"
-            sx={{
-              bgcolor: "transparent",
-              borderBottom: "1px solid", // Fixed property name
-              borderColor: "#18242E", // Now works as expected
-              borderRadius: "0px",
-              p: 4,
-            }}
-          >
-            <CardContent>
-              <TbBrandBluesky size="32" color="#34B3F1" />
-              <Typography
-                level="title-lg"
-                textColor="#ffffff"
-                sx={{ mt: 2.5, mb: 1 }}
-              >
-                Integrate today
-              </Typography>
-              <Typography textColor="#8696A1">
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your code with SDKs for your
-                favorite programming.
-              </Typography>
-            </CardContent>
-          </Card>{" "}
-          <Card
-            variant="solid"
-            sx={{
-              bgcolor: "transparent",
-              borderRight: "1px solid", // Added 'solid' style
-              borderColor: "#18242E", // Now works as expected
-              borderRadius: "0px",
-              p: 4,
-            }}
-          >
-            <CardContent>
-              <TbBrandBluesky size="32" color="#34B3F1" />
-              <Typography
-                level="title-lg"
-                textColor="#ffffff"
-                sx={{ mt: 2.5, mb: 1 }}
-              >
-                Integrate today
-              </Typography>
-              <Typography textColor="#8696A1">
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your code with SDKs for your
-                favorite programming.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            variant="solid"
-            sx={{
-              bgcolor: "transparent",
-              borderRight: "1px solid", // Added 'solid' style
-              borderColor: "#18242E", // Now works as expected
-              borderRadius: "0px",
-              p: 4,
-            }}
-          >
-            <CardContent>
-              <TbBrandBluesky size="32" color="#34B3F1" />
-              <Typography
-                level="title-lg"
-                textColor="#ffffff"
-                sx={{ mt: 2.5, mb: 1 }}
-              >
-                Integrate today
-              </Typography>
-              <Typography textColor="#8696A1">
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your code with SDKs for your
-                favorite programming.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            variant="solid"
-            sx={{
-              bgcolor: "transparent",
-              borderColor: "#18242E", // Now works as expected
-              borderRadius: "0px",
-              p: 4,
-            }}
-          >
-            <CardContent>
-              <TbBrandBluesky size="32" color="#34B3F1" />
-              <Typography
-                level="title-lg"
-                textColor="#ffffff"
-                sx={{ mt: 2.5, mb: 1 }}
-              >
-                Integrate today
-              </Typography>
-              <Typography textColor="#8696A1">
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your code with SDKs for your
-                favorite programming.
-              </Typography>
-            </CardContent>
-          </Card>
+            <Card
+              variant="solid"
+              sx={{
+                bgcolor: "transparent",
+                borderRight: "1px solid", // Added 'solid' style
+                borderBottom: "1px solid", // Fixed property name
+                borderColor: "#18242E", // Now works as expected
+                borderRadius: "0px",
+                p: 4,
+              }}
+            >
+              <CardContent>
+                <TbBrandBluesky size="32" color="#34B3F1" />
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                  sx={{ mt: 2.5, mb: 1 }}
+                >
+                  Integrate today
+                </Typography>
+                <Typography textColor="#8696A1">
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your code with SDKs for your
+                  favorite programming.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              variant="solid"
+              sx={{
+                bgcolor: "transparent",
+                borderRight: "1px solid", // Added 'solid' style
+                borderBottom: "1px solid", // Fixed property name
+                borderColor: "#18242E", // Now works as expected
+                borderRadius: "0px",
+                p: 4,
+              }}
+            >
+              <CardContent>
+                <TbBrandBluesky size="32" color="#34B3F1" />
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                  sx={{ mt: 2.5, mb: 1 }}
+                >
+                  Integrate today
+                </Typography>
+                <Typography textColor="#8696A1">
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your code with SDKs for your
+                  favorite programming.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              variant="solid"
+              sx={{
+                bgcolor: "transparent",
+                borderBottom: "1px solid", // Fixed property name
+                borderColor: "#18242E", // Now works as expected
+                borderRadius: "0px",
+                p: 4,
+              }}
+            >
+              <CardContent>
+                <TbBrandBluesky size="32" color="#34B3F1" />
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                  sx={{ mt: 2.5, mb: 1 }}
+                >
+                  Integrate today
+                </Typography>
+                <Typography textColor="#8696A1">
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your code with SDKs for your
+                  favorite programming.
+                </Typography>
+              </CardContent>
+            </Card>{" "}
+            <Card
+              variant="solid"
+              sx={{
+                bgcolor: "transparent",
+                borderRight: "1px solid", // Added 'solid' style
+                borderColor: "#18242E", // Now works as expected
+                borderRadius: "0px",
+                p: 4,
+              }}
+            >
+              <CardContent>
+                <TbBrandBluesky size="32" color="#34B3F1" />
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                  sx={{ mt: 2.5, mb: 1 }}
+                >
+                  Integrate today
+                </Typography>
+                <Typography textColor="#8696A1">
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your code with SDKs for your
+                  favorite programming.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              variant="solid"
+              sx={{
+                bgcolor: "transparent",
+                borderRight: "1px solid", // Added 'solid' style
+                borderColor: "#18242E", // Now works as expected
+                borderRadius: "0px",
+                p: 4,
+              }}
+            >
+              <CardContent>
+                <TbBrandBluesky size="32" color="#34B3F1" />
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                  sx={{ mt: 2.5, mb: 1 }}
+                >
+                  Integrate today
+                </Typography>
+                <Typography textColor="#8696A1">
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your code with SDKs for your
+                  favorite programming.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              variant="solid"
+              sx={{
+                bgcolor: "transparent",
+                borderColor: "#18242E", // Now works as expected
+                borderRadius: "0px",
+                p: 4,
+              }}
+            >
+              <CardContent>
+                <TbBrandBluesky size="32" color="#34B3F1" />
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                  sx={{ mt: 2.5, mb: 1 }}
+                >
+                  Integrate today
+                </Typography>
+                <Typography textColor="#8696A1">
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your code with SDKs for your
+                  favorite programming.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
         </Box>
         {/* Divider */}
         <Box sx={{ py: 4 }}>
@@ -571,99 +625,102 @@ export default function Home() {
             }}
           />
         </Box>
+
         {/* Features Section */}
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          sx={{ pt: 4, pb: 4 }}
-        >
-          <Typography level="h1" sx={{ color: "#ffffff" }}>
-            Features
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={12.5}
-          sx={{ pb: 6, pt: 2 }}
-        >
+        <Box ref={featuresRef} sx={{ py: 4 }}>
           <Stack
-            spacing={2}
-            sx={{
-              width: "100%",
-            }}
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ pt: 4, pb: 4 }}
           >
-            <Typography level="h4" sx={{ color: "#ffffff" }}>
-              Yosemite National Park
-            </Typography>
-            <Typography sx={{ color: "#8696A1" }}>
-              Etiam vestibulum fringilla nibh, at faucibus diam maximus
-              tincidunt. Vivamus iaculis consectetur ultricies. Nam volutpat
-              turpis ut augue euismod, vel vulputate lorem vehicula. Ut
-              vestibulum eu sem et laoreet. Fusce dui felis, consectetur ac mi
-              quis, blandit viverra libero. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Sed id fermentum lectus, at sagittis
-              velit. Quisque pharetra lacus vel enim porta malesuada.
+            <Typography level="h1" sx={{ color: "#ffffff" }}>
+              Features
             </Typography>
           </Stack>
-
-          <Card
-            variant="plain"
-            sx={{
-              position: "relative",
-              borderRadius: "25px",
-              padding: "2px",
-              background: "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
-              boxShadow: "0 0 64px rgba(52, 179, 241, 0.16)",
-              animation: "gradientAnimation 6s linear infinite",
-              backgroundSize: "300% 300%",
-              transformStyle: "preserve-3d",
-              transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-              "@keyframes gradientAnimation": {
-                "0%": {
-                  backgroundPosition: "0% 50%",
-                },
-                "50%": {
-                  backgroundPosition: "100% 50%",
-                },
-                "100%": {
-                  backgroundPosition: "0% 50%",
-                },
-              },
-              "&:hover": {
-                transform: "perspective(600px) rotateX(2deg) rotateY(1deg)",
-              },
-            }}
+          <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={12.5}
+            sx={{ pb: 6, pt: 2 }}
           >
-            <Box
+            <Stack
+              spacing={2}
               sx={{
-                width: 628,
-                height: 408,
-                border: "8px solid #040D13",
-                borderRadius: "24px",
-                overflow: "hidden",
-                position: "relative",
-                margin: "-1px",
-                zIndex: 1, // Ensure content stays above gradient
+                width: "100%",
               }}
             >
-              <Image
-                src="/screens/Dashboard.jpg"
-                alt="Screen"
-                layout="intrinsic"
-                width={628}
-                height={408}
-                style={{
-                  display: "block",
-                  objectFit: "contain",
+              <Typography level="h4" sx={{ color: "#ffffff" }}>
+                Yosemite National Park
+              </Typography>
+              <Typography sx={{ color: "#8696A1" }}>
+                Etiam vestibulum fringilla nibh, at faucibus diam maximus
+                tincidunt. Vivamus iaculis consectetur ultricies. Nam volutpat
+                turpis ut augue euismod, vel vulputate lorem vehicula. Ut
+                vestibulum eu sem et laoreet. Fusce dui felis, consectetur ac mi
+                quis, blandit viverra libero. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Sed id fermentum lectus, at
+                sagittis velit. Quisque pharetra lacus vel enim porta malesuada.
+              </Typography>
+            </Stack>
+
+            <Card
+              variant="plain"
+              sx={{
+                position: "relative",
+                borderRadius: "25px",
+                padding: "2px",
+                background: "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
+                boxShadow: "0 0 64px rgba(52, 179, 241, 0.16)",
+                animation: "gradientAnimation 6s linear infinite",
+                backgroundSize: "300% 300%",
+                transformStyle: "preserve-3d",
+                transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                "@keyframes gradientAnimation": {
+                  "0%": {
+                    backgroundPosition: "0% 50%",
+                  },
+                  "50%": {
+                    backgroundPosition: "100% 50%",
+                  },
+                  "100%": {
+                    backgroundPosition: "0% 50%",
+                  },
+                },
+                "&:hover": {
+                  transform: "perspective(600px) rotateX(2deg) rotateY(1deg)",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  width: 628,
+                  height: 408,
+                  border: "8px solid #040D13",
+                  borderRadius: "24px",
+                  overflow: "hidden",
                   position: "relative",
+                  margin: "-1px",
+                  zIndex: 1, // Ensure content stays above gradient
                 }}
-              />
-            </Box>
-          </Card>
-        </Stack>
+              >
+                <Image
+                  src="/screens/Dashboard.jpg"
+                  alt="Screen"
+                  layout="intrinsic"
+                  width={628}
+                  height={408}
+                  style={{
+                    display: "block",
+                    objectFit: "contain",
+                    position: "relative",
+                  }}
+                />
+              </Box>
+            </Card>
+          </Stack>
+        </Box>
         <Divider sx={{ width: "64px", bgcolor: "#18242E", margin: "0 auto" }} />
 
         {/* Divider */}
@@ -955,148 +1012,151 @@ export default function Home() {
           />
         </Box>
         {/* Integrations Section */}
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-          sx={{ mt: 2, mb: 2 }}
-        >
-          <Typography level="h1" sx={{ color: "#ffffff" }}>
-            Integrations
-          </Typography>
-          <Tabs
-            aria-label="tabs"
-            defaultValue={0}
-            sx={{ bgcolor: "#040D13", p: 1 }}
-          >
-            <TabList
-              disableUnderline
-              sx={{
-                p: 0.5,
-                gap: 2,
-                borderRadius: "xl",
-                bgcolor: "#040D13",
-                "& .MuiTab-root": {
-                  color: "#8696A1", // Default text color
-                  borderColor: "#18242E",
-                  "&:hover": {
-                    color: "#8696A1",
-                    bgcolor: "#18242E !important", // Hover color
-                  },
-                },
-                '& .MuiTab-root[aria-selected="true"]': {
-                  color: "#ffffff", // Selected text color
-                  borderColor: "#ffffff",
-                  boxShadow: "sm",
-                  bgcolor: "#18242E",
-                },
-              }}
-            >
-              <Tab disableIndicator>Feature</Tab>
-              <Tab disableIndicator>Specifications</Tab>
-              <Tab disableIndicator>Review</Tab>
-              <Tab disableIndicator>Support</Tab>
-            </TabList>
-          </Tabs>
-
+        <Box ref={integrationsRef} sx={{ py: 4 }}>
           <Stack
-            direction="row"
+            direction="column"
             justifyContent="center"
             alignItems="center"
-            spacing={12.5}
-            sx={{ pb: 6, pt: 2 }}
+            spacing={2}
+            sx={{ mt: 2, mb: 2 }}
           >
-            <Stack
-              spacing={3}
-              sx={{
-                width: "100%",
-              }}
+            <Typography level="h1" sx={{ color: "#ffffff" }}>
+              Integrations
+            </Typography>
+            <Tabs
+              aria-label="tabs"
+              defaultValue={0}
+              sx={{ bgcolor: "#040D13", p: 1 }}
             >
-              <Stack spacing={1.5}>
-                <Typography level="h4" sx={{ color: "#ffffff" }}>
-                  Yosemite National Park
-                </Typography>
-                <Typography sx={{ color: "#8696A1" }}>
-                  Etiam vestibulum fringilla nibh, at faucibus diam maximus
-                  tincidunt. Vivamus iaculis consectetur ultricies. Nam volutpat
-                  turpis ut augue euismod, vel vulputate lorem vehicula. Ut
-                  vestibulum eu sem et laoreet. Fusce dui felis, consectetur ac
-                  mi quis, blandit viverra libero. Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit. Sed id fermentum lectus, at
-                  sagittis velit. Quisque pharetra lacus vel enim porta
-                  malesuada.
-                </Typography>
-              </Stack>
-              <Button
-                color="primary"
-                variant="solid"
-                endDecorator={<TbChevronRight size={20} />}
+              <TabList
+                disableUnderline
                 sx={{
-                  width: "fit-content",
-                  minWidth: "auto",
+                  p: 0.5,
+                  gap: 2,
+                  borderRadius: "xl",
+                  bgcolor: "#040D13",
+                  "& .MuiTab-root": {
+                    color: "#8696A1", // Default text color
+                    borderColor: "#18242E",
+                    "&:hover": {
+                      color: "#8696A1",
+                      bgcolor: "#18242E !important", // Hover color
+                    },
+                  },
+                  '& .MuiTab-root[aria-selected="true"]': {
+                    color: "#ffffff", // Selected text color
+                    borderColor: "#ffffff",
+                    boxShadow: "sm",
+                    bgcolor: "#18242E",
+                  },
                 }}
               >
-                Get started
-              </Button>
-            </Stack>
+                <Tab disableIndicator>Feature</Tab>
+                <Tab disableIndicator>Specifications</Tab>
+                <Tab disableIndicator>Review</Tab>
+                <Tab disableIndicator>Support</Tab>
+              </TabList>
+            </Tabs>
 
-            <Card
-              variant="plain"
-              sx={{
-                position: "relative",
-                borderRadius: "25px",
-                padding: "2px",
-                background: "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
-                boxShadow: "0 0 64px rgba(52, 179, 241, 0.16)",
-                animation: "gradientAnimation 6s linear infinite",
-                backgroundSize: "300% 300%",
-                transformStyle: "preserve-3d",
-                transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-                "@keyframes gradientAnimation": {
-                  "0%": {
-                    backgroundPosition: "0% 50%",
-                  },
-                  "50%": {
-                    backgroundPosition: "100% 50%",
-                  },
-                  "100%": {
-                    backgroundPosition: "0% 50%",
-                  },
-                },
-                "&:hover": {
-                  transform: "perspective(600px) rotateX(2deg) rotateY(1deg)",
-                },
-              }}
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={12.5}
+              sx={{ pb: 6, pt: 2 }}
             >
-              <Box
+              <Stack
+                spacing={3}
                 sx={{
-                  width: 628,
-                  height: 408,
-                  border: "8px solid #040D13",
-                  borderRadius: "24px",
-                  overflow: "hidden",
-                  position: "relative",
-                  margin: "-1px",
-                  zIndex: 1, // Ensure content stays above gradient
+                  width: "100%",
                 }}
               >
-                <Image
-                  src="/screens/Dashboard.jpg"
-                  alt="Screen"
-                  layout="intrinsic"
-                  width={628}
-                  height={408}
-                  style={{
-                    display: "block",
-                    objectFit: "contain",
-                    position: "relative",
+                <Stack spacing={1.5}>
+                  <Typography level="h4" sx={{ color: "#ffffff" }}>
+                    Yosemite National Park
+                  </Typography>
+                  <Typography sx={{ color: "#8696A1" }}>
+                    Etiam vestibulum fringilla nibh, at faucibus diam maximus
+                    tincidunt. Vivamus iaculis consectetur ultricies. Nam
+                    volutpat turpis ut augue euismod, vel vulputate lorem
+                    vehicula. Ut vestibulum eu sem et laoreet. Fusce dui felis,
+                    consectetur ac mi quis, blandit viverra libero. Lorem ipsum
+                    dolor sit amet, consectetur adipiscing elit. Sed id
+                    fermentum lectus, at sagittis velit. Quisque pharetra lacus
+                    vel enim porta malesuada.
+                  </Typography>
+                </Stack>
+                <Button
+                  color="primary"
+                  variant="solid"
+                  endDecorator={<TbChevronRight size={20} />}
+                  sx={{
+                    width: "fit-content",
+                    minWidth: "auto",
                   }}
-                />
-              </Box>
-            </Card>
+                >
+                  Get started
+                </Button>
+              </Stack>
+
+              <Card
+                variant="plain"
+                sx={{
+                  position: "relative",
+                  borderRadius: "25px",
+                  padding: "2px",
+                  background:
+                    "linear-gradient(45deg, #126CA8, #0A1E2B, #126CA8)",
+                  boxShadow: "0 0 64px rgba(52, 179, 241, 0.16)",
+                  animation: "gradientAnimation 6s linear infinite",
+                  backgroundSize: "300% 300%",
+                  transformStyle: "preserve-3d",
+                  transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                  "@keyframes gradientAnimation": {
+                    "0%": {
+                      backgroundPosition: "0% 50%",
+                    },
+                    "50%": {
+                      backgroundPosition: "100% 50%",
+                    },
+                    "100%": {
+                      backgroundPosition: "0% 50%",
+                    },
+                  },
+                  "&:hover": {
+                    transform: "perspective(600px) rotateX(2deg) rotateY(1deg)",
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 628,
+                    height: 408,
+                    border: "8px solid #040D13",
+                    borderRadius: "24px",
+                    overflow: "hidden",
+                    position: "relative",
+                    margin: "-1px",
+                    zIndex: 1, // Ensure content stays above gradient
+                  }}
+                >
+                  <Image
+                    src="/screens/Dashboard.jpg"
+                    alt="Screen"
+                    layout="intrinsic"
+                    width={628}
+                    height={408}
+                    style={{
+                      display: "block",
+                      objectFit: "contain",
+                      position: "relative",
+                    }}
+                  />
+                </Box>
+              </Card>
+            </Stack>
           </Stack>
-        </Stack>
+        </Box>
         {/* Divider */}
         <Box sx={{ py: 4 }}>
           <Divider
@@ -1109,135 +1169,140 @@ export default function Home() {
           />
         </Box>
         {/* How it works Section */}
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={5}
-          sx={{ mt: 3, mb: 6 }}
-        >
-          <Typography level="h1" fontWeight="400" sx={{ color: "#ffffff" }}>
-            How it works
-          </Typography>
-
+        <Box ref={howItWorksRef} sx={{ py: 4 }}>
           <Stack
-            direction="row"
-            alignItems="center"
+            direction="column"
             justifyContent="center"
-            spacing={6}
+            alignItems="center"
+            spacing={5}
+            sx={{ mt: 3, mb: 6 }}
           >
-            <Stack
-              direction="column"
-              alignItems="center"
-              spacing={2}
-              sx={{ alignItems: "center" }}
-            >
-              <Typography
-                level="h1"
-                sx={{
-                  fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  textAlign: "center",
-
-                  lineHeight: "0.8",
-                }}
-              >
-                1
-              </Typography>
-              <Typography
-                level="h3"
-                textColor="#ffffff"
-                sx={{ textAlign: "center" }}
-              >
-                Sign Up
-              </Typography>
-              <Typography textColor="#8696A1" sx={{ textAlign: "center" }}>
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your workflow.
-              </Typography>
-            </Stack>
-
-            <Box sx={{ alignContent: "center" }}>
-              <Divider
-                orientation="vertical"
-                sx={{ height: "64px", bgcolor: "#18242E" }}
-              />
-            </Box>
+            <Typography level="h1" fontWeight="400" sx={{ color: "#ffffff" }}>
+              How it works
+            </Typography>
 
             <Stack
-              direction="column"
+              direction="row"
               alignItems="center"
-              spacing={2}
-              sx={{ alignItems: "center" }}
+              justifyContent="center"
+              spacing={6}
             >
-              <Typography
-                level="h1"
-                sx={{
-                  fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  textAlign: "center",
-                  lineHeight: "0.8",
-                }}
+              <Stack
+                direction="column"
+                alignItems="center"
+                spacing={2}
+                sx={{ alignItems: "center" }}
               >
-                2
-              </Typography>
-              <Typography
-                level="h3"
-                textColor="#ffffff"
-                sx={{ textAlign: "center" }}
-              >
-                Sign Up
-              </Typography>
-              <Typography textColor="#8696A1" sx={{ textAlign: "center" }}>
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your workflow.
-              </Typography>
-            </Stack>
-            <Box sx={{ alignContent: "center" }}>
-              <Divider
-                orientation="vertical"
-                sx={{ height: "64px", bgcolor: "#18242E" }}
-              />
-            </Box>
+                <Typography
+                  level="h1"
+                  sx={{
+                    fontSize: "124px",
+                    background:
+                      "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    textAlign: "center",
 
-            <Stack
-              direction="column"
-              alignItems="center"
-              spacing={2}
-              sx={{ alignItems: "center" }}
-            >
-              <Typography
-                level="h1"
-                sx={{
-                  fontSize: "124px",
-                  background: "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  textAlign: "center",
+                    lineHeight: "0.8",
+                  }}
+                >
+                  1
+                </Typography>
+                <Typography
+                  level="h3"
+                  textColor="#ffffff"
+                  sx={{ textAlign: "center" }}
+                >
+                  Sign Up
+                </Typography>
+                <Typography textColor="#8696A1" sx={{ textAlign: "center" }}>
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your workflow.
+                </Typography>
+              </Stack>
 
-                  lineHeight: "0.8",
-                }}
+              <Box sx={{ alignContent: "center" }}>
+                <Divider
+                  orientation="vertical"
+                  sx={{ height: "64px", bgcolor: "#18242E" }}
+                />
+              </Box>
+
+              <Stack
+                direction="column"
+                alignItems="center"
+                spacing={2}
+                sx={{ alignItems: "center" }}
               >
-                3
-              </Typography>
-              <Typography
-                level="h3"
-                textColor="#ffffff"
-                sx={{ textAlign: "center" }}
+                <Typography
+                  level="h1"
+                  sx={{
+                    fontSize: "124px",
+                    background:
+                      "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    textAlign: "center",
+                    lineHeight: "0.8",
+                  }}
+                >
+                  2
+                </Typography>
+                <Typography
+                  level="h3"
+                  textColor="#ffffff"
+                  sx={{ textAlign: "center" }}
+                >
+                  Sign Up
+                </Typography>
+                <Typography textColor="#8696A1" sx={{ textAlign: "center" }}>
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your workflow.
+                </Typography>
+              </Stack>
+              <Box sx={{ alignContent: "center" }}>
+                <Divider
+                  orientation="vertical"
+                  sx={{ height: "64px", bgcolor: "#18242E" }}
+                />
+              </Box>
+
+              <Stack
+                direction="column"
+                alignItems="center"
+                spacing={2}
+                sx={{ alignItems: "center" }}
               >
-                Sign Up
-              </Typography>
-              <Typography textColor="#8696A1" sx={{ textAlign: "center" }}>
-                A simple, elegant interface so you can start sending emails in
-                minutes. It fits right into your workflow.
-              </Typography>
+                <Typography
+                  level="h1"
+                  sx={{
+                    fontSize: "124px",
+                    background:
+                      "linear-gradient(0deg, #040D13 10%, #34B3F1 90%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    textAlign: "center",
+
+                    lineHeight: "0.8",
+                  }}
+                >
+                  3
+                </Typography>
+                <Typography
+                  level="h3"
+                  textColor="#ffffff"
+                  sx={{ textAlign: "center" }}
+                >
+                  Sign Up
+                </Typography>
+                <Typography textColor="#8696A1" sx={{ textAlign: "center" }}>
+                  A simple, elegant interface so you can start sending emails in
+                  minutes. It fits right into your workflow.
+                </Typography>
+              </Stack>
             </Stack>
           </Stack>
-        </Stack>
+        </Box>
 
         {/* Divider */}
         <Box sx={{ py: 4 }}>
@@ -1251,274 +1316,292 @@ export default function Home() {
           />
         </Box>
         {/* Pricing Section */}
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-          sx={{ mt: 2, mb: 2 }}
-        >
-          <Typography level="h1" fontWeight={400} sx={{ color: "#ffffff" }}>
-            Pricing
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          spacing={3}
-          sx={{
-            justifyContent: "space-between",
-            alignItems: "center",
-            pt: 4,
-            pb: 4,
-          }}
-        >
-          {/* Card 1 */}
-          <Grid container columns={{ xs: 4, md: 12 }}>
-            <Card
-              sx={{
-                bgcolor: "#040D13",
-                borderColor: "#18242E",
-                borderWidth: 2,
-                borderStyle: "solid",
-                width: "440px",
-                borderRadius: "20px",
-              }}
-              size="lg"
-              variant="outlined"
-            >
-              <Typography sx={{ color: "#ffffff" }} level="h2">
-                Basic
-              </Typography>
-              <Typography
-                sx={{ color: "#ffffff", mr: "auto" }}
-                level="title-lg"
-              >
-                1.990€{" "}
-                <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
-                  / month
-                </Typography>
-              </Typography>
-              <Divider
-                inset="none"
+        <Box ref={pricingRef} sx={{ py: 4 }}>
+          <Stack
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+            sx={{ mt: 2, mb: 2 }}
+          >
+            <Typography level="h1" fontWeight={400} sx={{ color: "#ffffff" }}>
+              Pricing
+            </Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={3}
+            sx={{
+              justifyContent: "space-between",
+              alignItems: "center",
+              pt: 4,
+              pb: 4,
+            }}
+          >
+            {/* Card 1 */}
+            <Grid container columns={{ xs: 4, md: 12 }}>
+              <Card
                 sx={{
-                  Color: "#18242E",
+                  bgcolor: "#040D13",
+                  borderColor: "#18242E",
+                  borderWidth: 2,
+                  borderStyle: "solid",
+                  width: "440px",
+                  borderRadius: "20px",
                 }}
-              />
-              <Stack direction="column" spacing={3}>
-                <List
-                  size="sm"
-                  sx={{
-                    backgroundColor: "#040D13",
-                    color: "#ffffff",
-                    p: 0,
-                    m: 0,
-                  }}
-                >
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                </List>
-
-                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
-                  Start now
-                </Button>
-              </Stack>
-            </Card>
-          </Grid>
-          <Grid container columns={{ xs: 4, md: 12 }}>
-            <Card
-              sx={{
-                bgcolor: "#040D13",
-                borderColor: "#34B3F1",
-                borderWidth: 2,
-                borderStyle: "solid",
-                width: "440px",
-
-                boxShadow: "0 0 128px rgba(52, 179, 241, 0.16)",
-                borderRadius: "20px",
-              }}
-              size="lg"
-              variant="outlined"
-            >
-              <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
-                <Typography
-                  sx={{ color: "#ffffff", alignItems: "center" }}
-                  level="h2"
-                >
-                  Professional
+                size="lg"
+                variant="outlined"
+              >
+                <Typography sx={{ color: "#ffffff" }} level="h2">
+                  Basic
                 </Typography>
-                <Stack
+                <Typography
+                  sx={{ color: "#ffffff", mr: "auto" }}
+                  level="title-lg"
+                >
+                  1.990€{" "}
+                  <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
+                    / month
+                  </Typography>
+                </Typography>
+                <Divider
+                  inset="none"
                   sx={{
-                    pl: 1,
-                    pr: 1,
-                    height: "24px !important",
-                    border: "1px solid #34B3F1",
-                    borderRadius: "20px",
-                    justifyContent: "center",
+                    Color: "#18242E",
                   }}
+                />
+                <Stack direction="column" spacing={3}>
+                  <List
+                    size="sm"
+                    sx={{
+                      backgroundColor: "#040D13",
+                      color: "#ffffff",
+                      p: 0,
+                      m: 0,
+                    }}
+                  >
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                  </List>
+
+                  <Button
+                    variant="solid"
+                    color="primary"
+                    sx={{ width: "100%" }}
+                  >
+                    Start now
+                  </Button>
+                </Stack>
+              </Card>
+            </Grid>
+            <Grid container columns={{ xs: 4, md: 12 }}>
+              <Card
+                sx={{
+                  bgcolor: "#040D13",
+                  borderColor: "#34B3F1",
+                  borderWidth: 2,
+                  borderStyle: "solid",
+                  width: "440px",
+
+                  boxShadow: "0 0 128px rgba(52, 179, 241, 0.16)",
+                  borderRadius: "20px",
+                }}
+                size="lg"
+                variant="outlined"
+              >
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  sx={{ alignItems: "center" }}
                 >
                   <Typography
-                    sx={{ color: "#34B3F1" }}
-                    level="body-xs"
-                    fontWeight="600"
+                    sx={{ color: "#ffffff", alignItems: "center" }}
+                    level="h2"
                   >
-                    Best value
+                    Professional
                   </Typography>
+                  <Stack
+                    sx={{
+                      pl: 1,
+                      pr: 1,
+                      height: "24px !important",
+                      border: "1px solid #34B3F1",
+                      borderRadius: "20px",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography
+                      sx={{ color: "#34B3F1" }}
+                      level="body-xs"
+                      fontWeight="600"
+                    >
+                      Best value
+                    </Typography>
+                  </Stack>
                 </Stack>
-              </Stack>
-              <Typography
-                sx={{ color: "#ffffff", mr: "auto" }}
-                level="title-lg"
-              >
-                5.990€{" "}
-                <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
-                  / month
-                </Typography>
-              </Typography>
-              <Divider
-                inset="none"
-                sx={{
-                  Color: "#18242E",
-                }}
-              />
-              <Stack direction="column" spacing={3}>
-                <List
-                  size="sm"
-                  sx={{
-                    backgroundColor: "#040D13",
-                    color: "#ffffff",
-                    p: 0,
-                    m: 0,
-                  }}
+                <Typography
+                  sx={{ color: "#ffffff", mr: "auto" }}
+                  level="title-lg"
                 >
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                </List>
-
-                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
-                  Start now
-                </Button>
-              </Stack>
-            </Card>
-          </Grid>
-          <Grid container columns={{ xs: 4, md: 12 }}>
-            <Card
-              sx={{
-                bgcolor: "#040D13",
-                borderColor: "#18242E",
-                borderWidth: 2,
-                borderStyle: "solid",
-                width: "440px",
-
-                borderRadius: "20px",
-              }}
-              size="lg"
-              variant="outlined"
-            >
-              <Typography sx={{ color: "#ffffff" }} level="h2">
-                Basic
-              </Typography>
-              <Typography
-                sx={{ color: "#ffffff", mr: "auto" }}
-                level="title-lg"
-              >
-                1.990€{" "}
-                <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
-                  / month
+                  5.990€{" "}
+                  <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
+                    / month
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Divider
-                inset="none"
-                sx={{
-                  Color: "#18242E",
-                }}
-              />
-              <Stack direction="column" spacing={3}>
-                <List
-                  size="sm"
+                <Divider
+                  inset="none"
                   sx={{
-                    backgroundColor: "#040D13",
-                    color: "#ffffff",
-                    p: 0,
-                    m: 0,
+                    Color: "#18242E",
                   }}
-                >
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Virtual Credit Cards
-                  </ListItem>
-                  <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
-                    <TbCheck size="24" color="#8696A1" />
-                    Basic Analytics
-                  </ListItem>
-                </List>
+                />
+                <Stack direction="column" spacing={3}>
+                  <List
+                    size="sm"
+                    sx={{
+                      backgroundColor: "#040D13",
+                      color: "#ffffff",
+                      p: 0,
+                      m: 0,
+                    }}
+                  >
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                  </List>
 
-                <Button variant="solid" color="primary" sx={{ width: "100%" }}>
-                  Start now
-                </Button>
-              </Stack>
-            </Card>
-          </Grid>
-        </Stack>
+                  <Button
+                    variant="solid"
+                    color="primary"
+                    sx={{ width: "100%" }}
+                  >
+                    Start now
+                  </Button>
+                </Stack>
+              </Card>
+            </Grid>
+            <Grid container columns={{ xs: 4, md: 12 }}>
+              <Card
+                sx={{
+                  bgcolor: "#040D13",
+                  borderColor: "#18242E",
+                  borderWidth: 2,
+                  borderStyle: "solid",
+                  width: "440px",
+
+                  borderRadius: "20px",
+                }}
+                size="lg"
+                variant="outlined"
+              >
+                <Typography sx={{ color: "#ffffff" }} level="h2">
+                  Basic
+                </Typography>
+                <Typography
+                  sx={{ color: "#ffffff", mr: "auto" }}
+                  level="title-lg"
+                >
+                  1.990€{" "}
+                  <Typography sx={{ color: "#8696A1", fontSize: "sm" }}>
+                    / month
+                  </Typography>
+                </Typography>
+                <Divider
+                  inset="none"
+                  sx={{
+                    Color: "#18242E",
+                  }}
+                />
+                <Stack direction="column" spacing={3}>
+                  <List
+                    size="sm"
+                    sx={{
+                      backgroundColor: "#040D13",
+                      color: "#ffffff",
+                      p: 0,
+                      m: 0,
+                    }}
+                  >
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Virtual Credit Cards
+                    </ListItem>
+                    <ListItem sx={{ color: "#ffffff", p: 0, m: 0 }}>
+                      <TbCheck size="24" color="#8696A1" />
+                      Basic Analytics
+                    </ListItem>
+                  </List>
+
+                  <Button
+                    variant="solid"
+                    color="primary"
+                    sx={{ width: "100%" }}
+                  >
+                    Start now
+                  </Button>
+                </Stack>
+              </Card>
+            </Grid>
+          </Stack>
+        </Box>
 
         {/* Partners Section */}
         <Stack
@@ -1679,178 +1762,131 @@ export default function Home() {
           direction="column"
           justifyContent="center"
           alignItems="center"
-          spacing={2}
-          sx={{ mt: 2, mb: 2, p: 2 }}
+          spacing={3}
+          sx={{ m: 2 }}
         >
-          <Typography level="h1" sx={{ color: "#ffffff" }}>
+          <Typography level="h1" fontWeight={400} sx={{ color: "#ffffff" }}>
             Frequently asked questions
           </Typography>
-        </Stack>
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-          sx={{ mt: 2, mb: 2, p: 2 }}
-        >
+
           <AccordionGroup
             sx={{
               maxWidth: 800,
-              [`& .${AccordionSummary}`]: {
-                transition: "0.2s",
+              width: "100%",
+              "& .MuiAccordion-root": {
+                backgroundColor: "transparent",
+                boxShadow: "none",
+                "&:before": { display: "none" },
               },
-              [`& [aria-expanded="true"] .${AccordionSummary}`]: {
-                transform: "rotate(45deg)",
+              "& .MuiAccordionSummary-root": {
+                color: "#fff !important",
+                fontSize: "1.1rem", // h1 size
+                fontWeight: 500,
+                pt: 2.2,
+                pr: 1.6,
+                pl: 1.6,
+                minHeight: "auto",
+                "&:hover": {
+                  backgroundColor: "transparent !important",
+                },
               },
+              "& .MuiAccordionDetails-root": {
+                pb: 2,
+                fontSize: "1rem", // body-md
+                fontWeight: 500,
+                color: "#8696A1",
+                lineHeight: 1.6,
+              },
+              [`& .${accordionSummaryClasses.indicator}`]: {
+                color: "#fff",
+                transition: "transform 0.2s",
+                "& svg": {
+                  fontSize: "1.1rem",
+                },
+              },
+              [`& [aria-expanded="true"] .${accordionSummaryClasses.indicator}`]:
+                {
+                  transform: "rotate(45deg)",
+                },
             }}
           >
             <Accordion>
               <AccordionSummary
-                sx={{
-                  "& .MuiTypography-root": { color: "#ffffff" },
-                  fontSize: "lg",
-                  pt: 2,
-                  pb: 2,
-                }}
-                indicator={<TbPlus style={{ color: "#ffffff" }} />}
+                indicator={
+                  <TbPlus style={{ color: "#fff", fontSize: "1.2rem" }} />
+                }
               >
-                <Typography>First accordion</Typography>
+                How does the AI integration work?
               </AccordionSummary>
-              <AccordionDetails sx={{ color: "#888888", pb: 2 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <AccordionDetails>
+                Our AI system seamlessly integrates with your existing
+                infrastructure, providing real-time analytics and predictive
+                insights through a simple API.
               </AccordionDetails>
             </Accordion>
 
             <Accordion>
               <AccordionSummary
-                sx={{
-                  "& .MuiTypography-root": { color: "#ffffff" },
-                  fontSize: "lg",
-                  pt: 2,
-                  pb: 2,
-                }}
-                indicator={<TbPlus style={{ color: "#ffffff" }} />}
+                indicator={
+                  <TbPlus style={{ color: "#fff", fontSize: "1.2rem" }} />
+                }
               >
-                <Typography>First accordion</Typography>
+                What payment methods do you accept?
               </AccordionSummary>
-              <AccordionDetails sx={{ color: "#888888", pb: 2 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <AccordionDetails>
+                We accept all major credit cards, bank transfers, and
+                cryptocurrency. All transactions are securely processed through
+                our PCI-compliant system.
               </AccordionDetails>
             </Accordion>
 
             <Accordion>
               <AccordionSummary
-                sx={{
-                  "& .MuiTypography-root": { color: "#ffffff" },
-                  fontSize: "lg",
-                  pt: 2,
-                  pb: 2,
-                }}
-                indicator={<TbPlus style={{ color: "#ffffff" }} />}
+                indicator={
+                  <TbPlus style={{ color: "#fff", fontSize: "1.2rem" }} />
+                }
               >
-                <Typography>First accordion</Typography>
+                Can I upgrade my plan later?
               </AccordionSummary>
-              <AccordionDetails sx={{ color: "#888888", pb: 2 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <AccordionDetails>
+                Yes, you can upgrade or downgrade your plan at any time through
+                your account dashboard. Changes take effect immediately with
+                prorated billing.
               </AccordionDetails>
             </Accordion>
           </AccordionGroup>
         </Stack>
+
         {/* Footer Section */}
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent={"center"}
-          spacing={2}
-          sx={{ p: 2 }}
-        >
-          <Typography level="h1" sx={{ color: "#ffffff", mt: 2 }}>
-            Geneva
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={4}
-          sx={{ mb: 1, p: 1 }}
-        >
-          <Link
-            href="/about"
-            underline="none"
-            sx={{
-              color: "#8696A1",
-              fontWeight: 500,
-              "&:hover": {
-                color: "#fff",
-              },
-            }}
-          >
-            About us
-          </Link>
-          <Link
-            href="/link4"
-            underline="none"
-            sx={{
-              color: "#8696A1",
-              fontWeight: 500,
-              "&:hover": {
-                color: "#fff",
-              },
-            }}
-          >
-            Contact us
-          </Link>
-          <Link
-            href="/about"
-            underline="none"
-            sx={{
-              color: "#8696A1",
-              fontWeight: 500,
-              "&:hover": {
-                color: "#fff",
-              },
-            }}
-          >
-            Terms of use
-          </Link>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-          sx={{ mb: 2, p: 2 }}
-        >
-          <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-            <svg
-              width="16"
-              height="12"
-              viewBox="0 0 16 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M11.629 12L16 7.82713V12H11.629ZM8.0179 11.8848L8.01735 11.8843L8.0168 11.8848V11.8837L0.035456 4.15701V0L8.01735 7.72728L15.9992 0V4.15701L8.0179 11.8837V11.8848ZM0 11.9661V7.81399L4.35425 11.9661H0Z"
-                fill="white"
-              />
-            </svg>
-
-            <Typography level="body-sm" sx={{ color: "#ffffff", mt: 2 }}>
-              Designed with care by Ismail Mesbah
-            </Typography>
-          </Stack>
-
-          <Typography level="body-sm" sx={{ color: "#ffffff", mt: 2 }}>
-            © 2024 Geneva. All right reserved
-          </Typography>
-        </Stack>
+        <Footer />
       </Container>
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 32,
+          right: 32,
+          opacity: showScrollTop ? 1 : 0,
+          visibility: showScrollTop ? "visible" : "hidden",
+          transition: "opacity 0.3s ease, visibility 0.3s ease",
+          zIndex: 1000,
+        }}
+      >
+        <IconButton
+          variant="solid"
+          color="primary"
+          onClick={scrollToTop}
+          sx={{
+            borderRadius: "50%",
+            boxShadow: "md",
+            "&:hover": {
+              transform: "translateY(-2px)",
+              bgcolor: "primary.600",
+            },
+          }}
+        >
+          <TbArrowUp size={24} />
+        </IconButton>
+      </Box>
     </Box>
   );
 }
