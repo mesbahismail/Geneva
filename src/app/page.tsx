@@ -303,6 +303,8 @@ export default function Home() {
               border: "1px solid #34B3F1",
               borderRadius: "20px",
               padding: "4px 12px",
+              display: "inline-block",
+              maxWidth: "max-content",
             }}
           >
             <Typography

@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import {
   Box,
   Container,
@@ -10,6 +12,7 @@ import {
   Button,
   Typography,
   Link,
+  Checkbox,
 } from "@mui/joy";
 import {
   TbBrandGoogle,
@@ -17,7 +20,6 @@ import {
   TbChevronRight,
   TbCheck,
 } from "react-icons/tb";
-import Header from "@/components/Header";
 
 export default function LoginPage() {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -58,138 +60,38 @@ export default function LoginPage() {
   };
 
   return (
-    <Box sx={{ bgcolor: "#000000", minHeight: "100vh" }}>
+    <Box
+      sx={{
+        bgcolor: "#040D13",
+        minHeight: "100vh",
+      }}
+    >
+      {/* Cover light - Positioned before header */}
+      <Box
+        sx={{
+          position: "absolute",
+          width: "1000px",
+          height: "600px",
+          borderRadius: "50%",
+          backgroundColor: "rgba(20, 52, 73, 0.56)",
+          filter: "blur(500px)",
+          zIndex: 0,
+          // Position 200px above header start
+          top: "-200px",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      />
+
       <Container
         disableGutters
-        maxWidth={false}
         sx={{
-          maxWidth: 1352,
-          width: "100%",
-          "@media (min-width: 1352px)": {
-            maxWidth: 1352,
-          },
+          maxWidth: "1384px",
+          position: "relative",
         }}
       >
         {/* Header Section */}
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-          sx={{
-            height: "72px",
-            position: "sticky",
-            top: 0,
-            backgroundColor: isScrolled
-              ? "rgba(4, 13, 19, 0.48)"
-              : "transparent",
-            backdropFilter: isScrolled ? "blur(10px)" : "none",
-            transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
-            zIndex: 1000,
-            width: "100%",
-            margin: "0 auto",
-            "&:before": {
-              content: '""',
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: isScrolled
-                ? "rgba(4, 13, 19, 0.64)"
-                : "transparent",
-              backdropFilter: isScrolled ? "blur(10px)" : "none",
-              zIndex: -1,
-            },
-          }}
-        >
-          <Typography level="h2" sx={{ color: "#ffffff", mt: 2 }}>
-            Geneva
-          </Typography>
-
-          <Stack direction="row" spacing={4}>
-            <Link
-              href="/link1"
-              underline="none"
-              sx={{
-                color: "#8696A1",
-                fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
-              }}
-            >
-              Benefits
-            </Link>
-            <Link
-              href="/link2"
-              underline="none"
-              sx={{
-                color: "#8696A1",
-                fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
-              }}
-            >
-              Integrations
-            </Link>
-            <Link
-              href="/link3"
-              underline="none"
-              sx={{
-                color: "#8696A1",
-                fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
-              }}
-            >
-              How it works
-            </Link>
-            <Link
-              href="/link4"
-              underline="none"
-              sx={{
-                color: "#8696A1",
-                fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
-              }}
-            >
-              FAQs
-            </Link>
-            <Link
-              href="/link5"
-              underline="none"
-              sx={{
-                color: "#8696A1",
-                fontWeight: 500,
-                "&:hover": {
-                  color: "#fff",
-                },
-              }}
-            >
-              Pricing
-            </Link>
-          </Stack>
-
-          <Stack
-            direction="row"
-            spacing="16px"
-            alignItems="center"
-            sx={{ display: { xs: "none", md: "flex" } }}
-          >
-            <Button color="secondary" variant="outlined">
-              Login
-            </Button>
-            <Button color="primary" variant="solid">
-              Get started
-            </Button>
-          </Stack>
-        </Stack>
-
+        <Header />
         <Stack
           sx={{
             width: "100%",
@@ -202,7 +104,8 @@ export default function LoginPage() {
             sx={{
               display: "inline-flex",
               width: 570,
-              bgcolor: "#181818",
+              bgcolor: "#091D29",
+              border: "1px solid #223644",
               p: "40px",
               borderRadius: "20px",
               height: "fit-content",
@@ -264,22 +167,41 @@ export default function LoginPage() {
                 </Typography>
 
                 <Stack spacing={3}>
-                  <Input
-                    color="primary"
-                    variant="solid"
-                    placeholder="Email Address"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setError("");
-                    }}
-                    error={!!error}
-                  />
-                  {error && (
-                    <Typography sx={{ color: "danger.500", mt: -2 }}>
-                      {error}
-                    </Typography>
-                  )}
+                  <Stack spacing={2}>
+                    <Input
+                      color="primary"
+                      variant="solid"
+                      placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setError("");
+                      }}
+                      error={!!error}
+                    />
+                    {error && (
+                      <Typography sx={{ color: "danger.500", mt: -2 }}>
+                        {error}
+                      </Typography>
+                    )}
+                    <Input
+                      color="primary"
+                      variant="solid"
+                      placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setError("");
+                      }}
+                      error={!!error}
+                    />
+                    {error && (
+                      <Typography sx={{ color: "danger.500", mt: -2 }}>
+                        {error}
+                      </Typography>
+                    )}
+                  </Stack>
+                  <Checkbox label="Keep me logged in" />
 
                   <Button
                     onClick={handleSubmit}
@@ -288,7 +210,7 @@ export default function LoginPage() {
                     endDecorator={<TbChevronRight size={20} />}
                     sx={{ width: "100%" }}
                   >
-                    Send one time login link
+                    Login
                   </Button>
                 </Stack>
 
@@ -298,11 +220,14 @@ export default function LoginPage() {
                   justifyContent="center"
                   sx={{ width: "100%" }}
                 >
-                  <Box sx={{ flex: 1, height: "1px", bgcolor: "#444444" }} />
-                  <Typography fontSize="sm" sx={{ color: "#888", mx: "16px" }}>
+                  <Box sx={{ flex: 1, height: "1px", bgcolor: "#223644" }} />
+                  <Typography
+                    fontSize="sm"
+                    sx={{ color: "#8696A1", mx: "16px" }}
+                  >
                     OR
                   </Typography>
-                  <Box sx={{ flex: 1, height: "1px", bgcolor: "#444444" }} />
+                  <Box sx={{ flex: 1, height: "1px", bgcolor: "#223644" }} />
                 </Stack>
 
                 <Button
@@ -326,6 +251,7 @@ export default function LoginPage() {
             )}
           </Box>
         </Stack>
+        <Footer />
       </Container>
     </Box>
   );

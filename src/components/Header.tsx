@@ -51,77 +51,22 @@ export default function Header() {
         },
       }}
     >
-      <Typography level="h2" sx={{ color: "#ffffff", mt: 2 }}>
+      <Typography
+        component={Link} // Add this
+        href="/" // Add this
+        level="h2"
+        sx={{
+          color: "#ffffff",
+
+          textDecoration: "none", // Remove underline
+          "&:hover": {
+            textDecoration: "none",
+            color: "rgba(255, 255, 255, 0.9)",
+          }, // Optional: Hover state
+        }}
+      >
         Geneva
       </Typography>
-
-      <Stack direction="row" spacing={4}>
-        <Link
-          href="/link1"
-          underline="none"
-          sx={{
-            color: "#8696A1",
-            fontWeight: 500,
-            "&:hover": {
-              color: "#fff",
-            },
-          }}
-        >
-          Benefits
-        </Link>
-        <Link
-          href="/link2"
-          underline="none"
-          sx={{
-            color: "#8696A1",
-            fontWeight: 500,
-            "&:hover": {
-              color: "#fff",
-            },
-          }}
-        >
-          Integrations
-        </Link>
-        <Link
-          href="/link3"
-          underline="none"
-          sx={{
-            color: "#8696A1",
-            fontWeight: 500,
-            "&:hover": {
-              color: "#fff",
-            },
-          }}
-        >
-          How it works
-        </Link>
-        <Link
-          href="/link4"
-          underline="none"
-          sx={{
-            color: "#8696A1",
-            fontWeight: 500,
-            "&:hover": {
-              color: "#fff",
-            },
-          }}
-        >
-          FAQs
-        </Link>
-        <Link
-          href="/link5"
-          underline="none"
-          sx={{
-            color: "#8696A1",
-            fontWeight: 500,
-            "&:hover": {
-              color: "#fff",
-            },
-          }}
-        >
-          Pricing
-        </Link>
-      </Stack>
 
       <Stack
         direction="row"
@@ -129,18 +74,10 @@ export default function Header() {
         alignItems="center"
         sx={{ display: { xs: "none", md: "flex" } }}
       >
-        <Button
-          color="secondary"
-          variant="outlined"
-          onClick={() => handleNavigation("/login")}
-        >
+        <Button color="secondary" variant="outlined">
           Login
         </Button>
-        <Button
-          color="primary"
-          variant="solid"
-          onClick={() => handleNavigation("/sign")}
-        >
+        <Button color="primary" variant="solid">
           Get started
         </Button>
       </Stack>

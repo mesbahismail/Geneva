@@ -54,7 +54,8 @@ const theme = extendTheme({
           ...(ownerState.color === "primary" &&
             ownerState.variant === "solid" && {
               backgroundColor: "#34B3F1",
-              color: "#000",
+              border: "1px solid #34B3F1",
+              color: "#050B0F",
               borderRadius: "12px",
               minHeight: "40px",
               padding: "0px 12px",
@@ -64,6 +65,7 @@ const theme = extendTheme({
                 "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
               "&:hover": {
                 backgroundColor: "#51C6FF",
+                border: "1px solid #81D6FF",
                 boxShadow: "0 0 24px rgba(81, 198, 255, 0.24)",
               },
               "&&": { fontWeight: 600 },
@@ -71,7 +73,7 @@ const theme = extendTheme({
 
           ...(ownerState.color === "secondary" &&
             ownerState.variant === "outlined" && {
-              border: "1px solid #444444",
+              border: "1px solid #355067",
               color: "#ffffff",
               backgroundColor: "transparent",
               borderRadius: "12px",
@@ -81,8 +83,8 @@ const theme = extendTheme({
               minWidth: "unset",
               transition: "border-color 0.2s ease, background-color 0.2s ease",
               "&:hover": {
-                backgroundColor: "#222",
-                borderColor: "#666",
+                backgroundColor: "#091D29",
+                borderColor: "#567691",
               },
               "&&": { fontWeight: 500 },
             }),
