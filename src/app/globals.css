@@ -1,0 +1,141 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-geneva-gradient: geneva-gradient 6s linear infinite;
+}
+
+/* Geneva theme: deep navy surfaces with a sky-blue accent. */
+:root {
+  --background: #ffffff;
+  --foreground: #040d13;
+  --card: #f6f9fb;
+  --card-foreground: #040d13;
+  --popover: #ffffff;
+  --popover-foreground: #040d13;
+  --primary: #0b7db8;
+  --primary-foreground: #ffffff;
+  --secondary: #eaf2f7;
+  --secondary-foreground: #0a1e2b;
+  --muted: #eef3f6;
+  --muted-foreground: #4e606c;
+  --accent: #e3eef5;
+  --accent-foreground: #0a1e2b;
+  --destructive: #dc2626;
+  --border: #dce5eb;
+  --input: #cfdbe3;
+  --ring: #34b3f1;
+  --chart-1: #34b3f1;
+  --chart-2: #126ca8;
+  --chart-3: #edb772;
+  --chart-4: #f2555a;
+  --chart-5: #8696a1;
+  --radius: 0.75rem;
+  --sidebar: #f6f9fb;
+  --sidebar-foreground: #040d13;
+  --sidebar-primary: #0b7db8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e3eef5;
+  --sidebar-accent-foreground: #0a1e2b;
+  --sidebar-border: #dce5eb;
+  --sidebar-ring: #34b3f1;
+}
+
+.dark {
+  --background: #040d13;
+  --foreground: #ffffff;
+  --card: #061620;
+  --card-foreground: #ffffff;
+  --popover: #091d29;
+  --popover-foreground: #ffffff;
+  --primary: #34b3f1;
+  --primary-foreground: #050b0f;
+  --secondary: #0f2d3f;
+  --secondary-foreground: #ffffff;
+  --muted: #0b1c27;
+  --muted-foreground: #8696a1;
+  --accent: #18242e;
+  --accent-foreground: #ffffff;
+  --destructive: #f87171;
+  --border: #18242e;
+  --input: #223644;
+  --ring: #34b3f1;
+  --chart-1: #34b3f1;
+  --chart-2: #126ca8;
+  --chart-3: #edb772;
+  --chart-4: #f2555a;
+  --chart-5: #8696a1;
+  --sidebar: #061620;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #34b3f1;
+  --sidebar-primary-foreground: #050b0f;
+  --sidebar-accent: #18242e;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #18242e;
+  --sidebar-ring: #34b3f1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@keyframes geneva-gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}

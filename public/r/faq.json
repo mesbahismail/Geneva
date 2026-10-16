@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq",
+  "title": "FAQ",
+  "description": "Accessible FAQ built on native details/summary with an animated plus icon.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/section-heading.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SectionHeading({\n  eyebrow,\n  title,\n  description,\n  className,\n}: {\n  eyebrow?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  className?: string\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex max-w-2xl flex-col items-center gap-4 text-center\",\n        className\n      )}\n    >\n      {eyebrow && (\n        <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n          {eyebrow}\n        </span>\n      )}\n      <h2 className=\"text-3xl font-normal tracking-tight text-balance sm:text-4xl md:text-5xl\">\n        {title}\n      </h2>\n      {description && (\n        <p className=\"text-base text-pretty text-muted-foreground sm:text-lg\">\n          {description}\n        </p>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/faq.tsx",
+      "content": "import { PlusIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { SectionHeading } from \"@/components/geneva/section-heading\"\n\nconst faqs = [\n  {\n    question: \"How does the AI integration work?\",\n    answer:\n      \"Geneva analyses your transactions to categorise spending, forecast cash flow and surface insights. It runs on encrypted data and never sells or shares your information.\",\n  },\n  {\n    question: \"Is my money and data safe?\",\n    answer:\n      \"Yes. Bank connections are read-only, all data is encrypted in transit and at rest, and sign-in is protected with biometrics and two-factor authentication.\",\n  },\n  {\n    question: \"What payment methods do you accept?\",\n    answer:\n      \"We accept all major credit and debit cards and bank transfers. All payments are processed through a PCI-compliant provider.\",\n  },\n  {\n    question: \"Can I upgrade my plan later?\",\n    answer:\n      \"Yes, you can upgrade or downgrade at any time from your account settings. Changes take effect immediately with prorated billing.\",\n  },\n  {\n    question: \"Do you offer a free trial?\",\n    answer:\n      \"The Basic plan is free forever, and Professional comes with a 14-day free trial. No credit card is required to start.\",\n  },\n]\n\nexport function Faq({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"faq\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-3xl px-4 sm:px-6\">\n        <SectionHeading title=\"Frequently asked questions\" />\n        <div className=\"mt-12 divide-y divide-border border-y border-border\">\n          {faqs.map((faq) => (\n            <details key={faq.question} className=\"group\">\n              <summary className=\"flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-medium outline-none focus-visible:text-primary [&::-webkit-details-marker]:hidden\">\n                {faq.question}\n                <PlusIcon\n                  aria-hidden=\"true\"\n                  className=\"size-5 shrink-0 transition-transform duration-200 group-open:rotate-45\"\n                />\n              </summary>\n              <p className=\"pb-6 text-muted-foreground\">{faq.answer}</p>\n            </details>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "faq",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

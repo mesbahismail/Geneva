@@ -1,186 +1,66 @@
-"use client";
+import type { Metadata } from "next"
 
-import * as React from "react";
-import { Box, Container, Stack, Link, Typography, Button } from "@mui/joy";
+import { SiteFooter } from "@/components/geneva/site-footer"
+import { SiteHeader } from "@/components/geneva/site-header"
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+export const metadata: Metadata = { title: "Terms of use" }
 
-import { TbMail } from "react-icons/tb";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+const sections = [
+  {
+    title: "1. Accepting these terms",
+    body: "By creating an account or using Geneva you agree to these terms. If you use Geneva on behalf of a company, you confirm you are authorised to accept them on its behalf.",
+  },
+  {
+    title: "2. Your account",
+    body: "You are responsible for keeping your login details secure and for all activity under your account. Tell us immediately if you suspect unauthorised access.",
+  },
+  {
+    title: "3. Acceptable use",
+    body: "Do not use Geneva for anything unlawful, to harm others, or to interfere with the service. We may suspend accounts that break these rules.",
+  },
+  {
+    title: "4. Plans and payments",
+    body: "Paid plans are billed in advance and renew automatically until cancelled. You can change or cancel your plan at any time from your account settings.",
+  },
+  {
+    title: "5. Your data",
+    body: "You own your data. We process it only to provide the service, as described in our privacy policy, and you can export or delete it at any time.",
+  },
+  {
+    title: "6. Liability",
+    body: "Geneva is provided “as is”. To the extent permitted by law, we are not liable for indirect or consequential losses arising from your use of the service.",
+  },
+  {
+    title: "7. Changes",
+    body: "We may update these terms from time to time. If changes are significant, we will notify you by email before they take effect.",
+  },
+]
 
-export default function AboutPage() {
-  const [isScrolled, setIsScrolled] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      setIsScrolled(offset > 10); // Adjust the threshold as needed
-    };
-
-    // Add event listener with passive option for better performance
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const [isAtStart, setIsAtStart] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const checkScrollPosition = () => {
-    if (!containerRef.current) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-    const tolerance = 5; // Pixel tolerance for edge detection
-
-    setIsAtStart(scrollLeft <= tolerance);
-    setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - tolerance);
-  };
-
-  useEffect(() => {
-    if (!containerRef.current?.style.scrollBehavior) {
-      containerRef.current?.style.setProperty(
-        "scroll-behavior",
-        "smooth",
-        "important"
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    const currentContainer = containerRef.current;
-    // Initial check with timeout to ensure layout
-    setTimeout(checkScrollPosition, 100);
-
-    currentContainer?.addEventListener("scroll", checkScrollPosition);
-    checkScrollPosition();
-    return () => {
-      currentContainer?.removeEventListener("scroll", checkScrollPosition);
-    };
-  }, []);
-
+export default function TermsPage() {
   return (
-    <Box
-      sx={{
-        bgcolor: "#040D13",
-        minHeight: "100vh",
-      }}
-    >
-      {/* Cover light - Positioned before header */}
-      <Box
-        sx={{
-          position: "absolute",
-          width: "1000px",
-          height: "600px",
-          borderRadius: "50%",
-          backgroundColor: "rgba(20, 52, 73, 0.56)",
-          filter: "blur(500px)",
-          zIndex: 0,
-          // Position 200px above header start
-          top: "-200px",
-          left: "50%",
-          transform: "translateX(-50%)",
-        }}
-      />
-
-      <Container
-        disableGutters
-        sx={{
-          maxWidth: "1384px",
-          position: "relative",
-        }}
-      >
-        {/* Header Section */}
-        <Header />
-
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={12.5}
-          sx={{ pb: 6, pt: 4 }}
-        >
-          <Stack
-            spacing={3}
-            sx={{
-              width: "600px",
-            }}
-          >
-            <Box
-              sx={{
-                m: 2,
-                border: "1px solid #34B3F1",
-                borderRadius: "20px",
-                padding: "4px 12px",
-                display: "inline-block",
-                maxWidth: "max-content",
-              }}
-            >
-              <Typography
-                level="body-sm"
-                fontWeight="500"
-                sx={{ color: "#34B3F1" }}
-              >
-                About us
-              </Typography>
-            </Box>
-            <Stack spacing={1.5}>
-              <Typography level="h1" fontWeight={400} sx={{ color: "#ffffff" }}>
-                We control our world one line at a time.{" "}
-              </Typography>
-              <Typography sx={{ color: "#8696A1" }}>
-                Etiam vestibulum fringilla nibh, at faucibus diam maximus
-                tincidunt. Vivamus iaculis consectetur ultricies. Nam volutpat
-                turpis ut augue euismod, vel vulputate lorem vehicula. Ut
-                vestibulum eu sem et laoreet. Fusce dui felis, consectetur ac mi
-                quis, blandit viverra libero. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Sed id fermentum lectus, at
-                sagittis velit. Quisque pharetra lacus vel enim porta malesuada.
-              </Typography>
-            </Stack>
-            <Button
-              color="primary"
-              variant="solid"
-              startDecorator={<TbMail size={20} />}
-              sx={{
-                width: "fit-content",
-                minWidth: "auto",
-              }}
-            >
-              Contact us
-            </Button>
-          </Stack>
-          <Box
-            sx={{
-              width: "640px",
-              height: "560px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              overflow: "hidden",
-              borderRadius: "20px",
-            }}
-          >
-            <Image
-              src="/about.jpg"
-              alt="about"
-              width={640}
-              height={560}
-              style={{
-                display: "block",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // Ensures the image covers the box without stretching
-                borderRadius: "20px",
-              }}
-            />
-          </Box>
-        </Stack>
-
-        {/* Footer Section */}
-        <Footer />
-      </Container>
-    </Box>
-  );
+    <>
+      <SiteHeader />
+      <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <span className="rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary">
+          Legal
+        </span>
+        <h1 className="mt-6 text-4xl font-normal tracking-tight sm:text-5xl">
+          Terms of use
+        </h1>
+        <p className="mt-4 text-muted-foreground">
+          Last updated: January 1, 2026. This is sample text for the template;
+          replace it with terms reviewed by your legal counsel.
+        </p>
+        <div className="mt-12 flex flex-col gap-10">
+          {sections.map((section) => (
+            <section key={section.title} className="flex flex-col gap-3">
+              <h2 className="text-xl font-medium">{section.title}</h2>
+              <p className="leading-relaxed text-muted-foreground">{section.body}</p>
+            </section>
+          ))}
+        </div>
+      </main>
+      <SiteFooter />
+    </>
+  )
 }

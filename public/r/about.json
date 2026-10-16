@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "about",
+  "title": "About",
+  "description": "About section with headline, story, image and stats row. Uses /geneva/about.jpg.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/about.tsx",
+      "content": "import Link from \"next/link\"\nimport { MailIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { buttonVariants } from \"@/components/ui/button\"\n\nconst stats = [\n  { value: \"2019\", label: \"Founded in Geneva\" },\n  { value: \"120k+\", label: \"People using Geneva\" },\n  { value: \"40+\", label: \"Supported currencies\" },\n  { value: \"4.9\", label: \"Average app rating\" },\n]\n\nexport function About({\n  imageSrc = \"/geneva/about.jpg\",\n  className,\n}: {\n  imageSrc?: string\n  className?: string\n}) {\n  return (\n    <section className={cn(\"relative isolate overflow-x-clip py-16\", className)}>\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute -top-56 left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-primary/10 blur-[160px]\"\n      />\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6\">\n        <div className=\"grid items-center gap-12 lg:grid-cols-2 lg:gap-20\">\n          <div className=\"flex flex-col items-start gap-6\">\n            <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n              About us\n            </span>\n            <h1 className=\"text-4xl font-normal tracking-tight text-balance sm:text-5xl\">\n              We control our world one line at a time.\n            </h1>\n            <p className=\"text-base text-muted-foreground sm:text-lg\">\n              Geneva started with a simple idea: managing money should feel as\n              calm and clear as a walk along the lake. We are a small team of\n              designers, engineers and finance nerds building tools that give\n              people real control over their finances, with AI that works for\n              them rather than against them.\n            </p>\n            <Link\n              href=\"/contact\"\n              className={cn(buttonVariants({ size: \"lg\" }), \"h-11 px-5 text-base\")}\n            >\n              <MailIcon className=\"size-5\" />\n              Contact us\n            </Link>\n          </div>\n          <div\n            role=\"img\"\n            aria-label=\"The Geneva team at work\"\n            style={{ backgroundImage: `url(\"${imageSrc}\")` }}\n            className=\"aspect-[8/7] w-full rounded-3xl bg-linear-135 from-primary/30 via-muted to-card bg-cover bg-center\"\n          />\n        </div>\n\n        <dl className=\"mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border lg:grid-cols-4\">\n          {stats.map((stat) => (\n            <div key={stat.label} className=\"flex flex-col gap-1 bg-background p-6 sm:p-8\">\n              <dt className=\"text-sm text-muted-foreground\">{stat.label}</dt>\n              <dd className=\"order-first text-3xl font-medium tracking-tight sm:text-4xl\">\n                {stat.value}\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+  "categories": [
+    "about",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

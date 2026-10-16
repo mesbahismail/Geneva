@@ -1,0 +1,704 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "geneva",
+  "homepage": "https://github.com/mesbahismail/Geneva",
+  "items": [
+    {
+      "name": "template",
+      "type": "registry:block",
+      "title": "Geneva template",
+      "description": "The complete Geneva template: landing page plus login, sign-up, about, contact and terms pages, with every Geneva block.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "checkbox",
+        "input",
+        "label",
+        "sheet",
+        "tabs",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/logo.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/site-header.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/site-footer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/screen-frame.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/hero.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/benefits.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/features.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/reviews.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/integrations.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/how-it-works.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/pricing.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/partners.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/faq.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/email-sent.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/social-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/login-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/signup-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/about.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/contact.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "type": "registry:page",
+          "target": "app/login/page.tsx"
+        },
+        {
+          "path": "src/app/signup/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup/page.tsx"
+        },
+        {
+          "path": "src/app/about/page.tsx",
+          "type": "registry:page",
+          "target": "app/about/page.tsx"
+        },
+        {
+          "path": "src/app/contact/page.tsx",
+          "type": "registry:page",
+          "target": "app/contact/page.tsx"
+        },
+        {
+          "path": "src/app/terms/page.tsx",
+          "type": "registry:page",
+          "target": "app/terms/page.tsx"
+        }
+      ],
+      "categories": [
+        "template",
+        "landing",
+        "marketing"
+      ],
+      "docs": "For the original look, also install the Geneva theme and font (theme, font) and add className=\"dark\" to <html>. Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+      "cssVars": {
+        "theme": {
+          "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes geneva-gradient": {
+          "0%, 100%": {
+            "background-position": "0% 50%"
+          },
+          "50%": {
+            "background-position": "100% 50%"
+          }
+        }
+      }
+    },
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Geneva theme",
+      "description": "Deep navy surfaces with a sky-blue accent, in light and dark variants.",
+      "cssVars": {
+        "theme": {
+          "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+        },
+        "light": {
+          "radius": "0.75rem",
+          "background": "#ffffff",
+          "foreground": "#040d13",
+          "card": "#f6f9fb",
+          "card-foreground": "#040d13",
+          "popover": "#ffffff",
+          "popover-foreground": "#040d13",
+          "primary": "#0b7db8",
+          "primary-foreground": "#ffffff",
+          "secondary": "#eaf2f7",
+          "secondary-foreground": "#0a1e2b",
+          "muted": "#eef3f6",
+          "muted-foreground": "#4e606c",
+          "accent": "#e3eef5",
+          "accent-foreground": "#0a1e2b",
+          "destructive": "#dc2626",
+          "border": "#dce5eb",
+          "input": "#cfdbe3",
+          "ring": "#34b3f1",
+          "chart-1": "#34b3f1",
+          "chart-2": "#126ca8",
+          "chart-3": "#edb772",
+          "chart-4": "#f2555a",
+          "chart-5": "#8696a1",
+          "sidebar": "#f6f9fb",
+          "sidebar-foreground": "#040d13",
+          "sidebar-primary": "#0b7db8",
+          "sidebar-primary-foreground": "#ffffff",
+          "sidebar-accent": "#e3eef5",
+          "sidebar-accent-foreground": "#0a1e2b",
+          "sidebar-border": "#dce5eb",
+          "sidebar-ring": "#34b3f1"
+        },
+        "dark": {
+          "background": "#040d13",
+          "foreground": "#ffffff",
+          "card": "#061620",
+          "card-foreground": "#ffffff",
+          "popover": "#091d29",
+          "popover-foreground": "#ffffff",
+          "primary": "#34b3f1",
+          "primary-foreground": "#050b0f",
+          "secondary": "#0f2d3f",
+          "secondary-foreground": "#ffffff",
+          "muted": "#0b1c27",
+          "muted-foreground": "#8696a1",
+          "accent": "#18242e",
+          "accent-foreground": "#ffffff",
+          "destructive": "#f87171",
+          "border": "#18242e",
+          "input": "#223644",
+          "ring": "#34b3f1",
+          "chart-1": "#34b3f1",
+          "chart-2": "#126ca8",
+          "chart-3": "#edb772",
+          "chart-4": "#f2555a",
+          "chart-5": "#8696a1",
+          "sidebar": "#061620",
+          "sidebar-foreground": "#ffffff",
+          "sidebar-primary": "#34b3f1",
+          "sidebar-primary-foreground": "#050b0f",
+          "sidebar-accent": "#18242e",
+          "sidebar-accent-foreground": "#ffffff",
+          "sidebar-border": "#18242e",
+          "sidebar-ring": "#34b3f1"
+        }
+      },
+      "css": {
+        "@keyframes geneva-gradient": {
+          "0%, 100%": {
+            "background-position": "0% 50%"
+          },
+          "50%": {
+            "background-position": "100% 50%"
+          }
+        }
+      },
+      "categories": [
+        "theme"
+      ]
+    },
+    {
+      "name": "font",
+      "type": "registry:font",
+      "title": "Space Grotesk",
+      "description": "Space Grotesk as the sans-serif font, as used by the Geneva template.",
+      "font": {
+        "family": "'Space Grotesk Variable', sans-serif",
+        "provider": "google",
+        "import": "Space_Grotesk",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/space-grotesk"
+      }
+    },
+    {
+      "name": "header",
+      "type": "registry:block",
+      "title": "Header",
+      "description": "Sticky site header with blur-on-scroll, anchor navigation and a mobile sheet menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/logo.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/site-header.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "navigation",
+        "marketing"
+      ]
+    },
+    {
+      "name": "footer",
+      "type": "registry:block",
+      "title": "Footer",
+      "description": "Centered site footer with logo, links and copyright row.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/logo.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/site-footer.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero",
+      "type": "registry:block",
+      "title": "Hero",
+      "description": "Hero with glow, headline, animated gradient product frame, CTA and avatar social proof. Uses /geneva/dashboard.jpg and /geneva/avatar-1..4.jpg.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/screen-frame.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/hero.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ],
+      "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+      "cssVars": {
+        "theme": {
+          "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes geneva-gradient": {
+          "0%, 100%": {
+            "background-position": "0% 50%"
+          },
+          "50%": {
+            "background-position": "100% 50%"
+          }
+        }
+      }
+    },
+    {
+      "name": "benefits",
+      "type": "registry:block",
+      "title": "Benefits",
+      "description": "Six-up benefits grid with hairline dividers and icons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/benefits.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features",
+      "type": "registry:block",
+      "title": "Features",
+      "description": "Alternating feature rows with checklists and framed screenshots. Uses /geneva/analytics.jpg, my-cards.jpg and ai-chat-1.jpg.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/screen-frame.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/features.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ],
+      "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+      "cssVars": {
+        "theme": {
+          "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes geneva-gradient": {
+          "0%, 100%": {
+            "background-position": "0% 50%"
+          },
+          "50%": {
+            "background-position": "100% 50%"
+          }
+        }
+      }
+    },
+    {
+      "name": "reviews",
+      "type": "registry:block",
+      "title": "Reviews",
+      "description": "Horizontally scrolling testimonial cards with edge fades and prev/next controls.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/reviews.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "testimonials",
+        "marketing"
+      ]
+    },
+    {
+      "name": "integrations",
+      "type": "registry:block",
+      "title": "Integrations",
+      "description": "Tabbed integrations showcase with copy, CTA and framed screenshot per tab. Uses /geneva/wallet.jpg, send-1.jpg, transactions.jpg and documents-grid.jpg.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/screen-frame.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/integrations.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ],
+      "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+      "cssVars": {
+        "theme": {
+          "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes geneva-gradient": {
+          "0%, 100%": {
+            "background-position": "0% 50%"
+          },
+          "50%": {
+            "background-position": "100% 50%"
+          }
+        }
+      }
+    },
+    {
+      "name": "how-it-works",
+      "type": "registry:block",
+      "title": "How it works",
+      "description": "Three numbered steps with large gradient numerals.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/how-it-works.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "steps",
+        "marketing"
+      ]
+    },
+    {
+      "name": "pricing",
+      "type": "registry:block",
+      "title": "Pricing",
+      "description": "Three pricing plans with a highlighted best-value tier.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/pricing.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
+    },
+    {
+      "name": "partners",
+      "type": "registry:block",
+      "title": "Partners",
+      "description": "Logo cloud with placeholder brand wordmarks.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/partners.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "logos",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq",
+      "type": "registry:block",
+      "title": "FAQ",
+      "description": "Accessible FAQ built on native details/summary with an animated plus icon.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/section-heading.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/faq.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "login",
+      "type": "registry:block",
+      "title": "Login",
+      "description": "Magic-link login card with validation, success state and social login buttons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/email-sent.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/social-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/login-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ]
+    },
+    {
+      "name": "signup",
+      "type": "registry:block",
+      "title": "Sign up",
+      "description": "Sign-up card with name, email and password validation, success state and social buttons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/email-sent.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/social-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/geneva/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ]
+    },
+    {
+      "name": "about",
+      "type": "registry:block",
+      "title": "About",
+      "description": "About section with headline, story, image and stats row. Uses /geneva/about.jpg.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/about.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ],
+      "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder."
+    },
+    {
+      "name": "contact",
+      "type": "registry:block",
+      "title": "Contact",
+      "description": "Contact section with channels list and a message form with success state.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/geneva/contact.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "contact",
+        "forms"
+      ]
+    }
+  ]
+}

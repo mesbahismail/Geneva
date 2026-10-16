@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "how-it-works",
+  "title": "How it works",
+  "description": "Three numbered steps with large gradient numerals.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/section-heading.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SectionHeading({\n  eyebrow,\n  title,\n  description,\n  className,\n}: {\n  eyebrow?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  className?: string\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex max-w-2xl flex-col items-center gap-4 text-center\",\n        className\n      )}\n    >\n      {eyebrow && (\n        <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n          {eyebrow}\n        </span>\n      )}\n      <h2 className=\"text-3xl font-normal tracking-tight text-balance sm:text-4xl md:text-5xl\">\n        {title}\n      </h2>\n      {description && (\n        <p className=\"text-base text-pretty text-muted-foreground sm:text-lg\">\n          {description}\n        </p>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/how-it-works.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\nimport { SectionHeading } from \"@/components/geneva/section-heading\"\n\nconst steps = [\n  {\n    title: \"Sign up\",\n    description:\n      \"Create your free account in under a minute. No credit card, no paperwork.\",\n  },\n  {\n    title: \"Connect\",\n    description:\n      \"Link your banks and cards securely. Geneva imports and categorises everything for you.\",\n  },\n  {\n    title: \"Grow\",\n    description:\n      \"Follow AI insights, automate savings and watch your goals come within reach.\",\n  },\n]\n\nexport function HowItWorks({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"how-it-works\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6\">\n        <SectionHeading title=\"How it works\" />\n        <ol className=\"mt-14 grid gap-12 md:grid-cols-3 md:gap-8\">\n          {steps.map((step, index) => (\n            <li key={step.title} className=\"flex flex-col items-center gap-4 text-center\">\n              <span\n                aria-hidden=\"true\"\n                className=\"bg-linear-to-t from-background from-10% to-primary to-90% bg-clip-text text-[7.5rem] leading-[0.8] font-medium text-transparent\"\n              >\n                {index + 1}\n              </span>\n              <h3 className=\"text-2xl font-medium\">\n                <span className=\"sr-only\">Step {index + 1}: </span>\n                {step.title}\n              </h3>\n              <p className=\"max-w-xs text-muted-foreground\">{step.description}</p>\n            </li>\n          ))}\n        </ol>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "steps",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

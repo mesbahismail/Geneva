@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing",
+  "title": "Pricing",
+  "description": "Three pricing plans with a highlighted best-value tier.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/section-heading.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SectionHeading({\n  eyebrow,\n  title,\n  description,\n  className,\n}: {\n  eyebrow?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  className?: string\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex max-w-2xl flex-col items-center gap-4 text-center\",\n        className\n      )}\n    >\n      {eyebrow && (\n        <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n          {eyebrow}\n        </span>\n      )}\n      <h2 className=\"text-3xl font-normal tracking-tight text-balance sm:text-4xl md:text-5xl\">\n        {title}\n      </h2>\n      {description && (\n        <p className=\"text-base text-pretty text-muted-foreground sm:text-lg\">\n          {description}\n        </p>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/pricing.tsx",
+      "content": "import Link from \"next/link\"\nimport { CheckIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { buttonVariants } from \"@/components/ui/button\"\nimport { SectionHeading } from \"@/components/geneva/section-heading\"\n\nconst plans = [\n  {\n    name: \"Basic\",\n    price: \"€0\",\n    period: \"/ month\",\n    description: \"Everything you need to get your finances in order.\",\n    features: [\n      \"2 connected accounts\",\n      \"1 virtual card\",\n      \"Basic analytics\",\n      \"Monthly reports\",\n      \"Email support\",\n    ],\n    cta: \"Start for free\",\n  },\n  {\n    name: \"Professional\",\n    price: \"€9.90\",\n    period: \"/ month\",\n    description: \"For people who want AI on their side, every day.\",\n    features: [\n      \"Unlimited accounts\",\n      \"10 virtual cards\",\n      \"Advanced analytics\",\n      \"AI assistant\",\n      \"Savings goals & automations\",\n      \"Priority support\",\n    ],\n    cta: \"Start free trial\",\n    featured: true,\n  },\n  {\n    name: \"Business\",\n    price: \"€29.90\",\n    period: \"/ month\",\n    description: \"Shared spending, approvals and exports for small teams.\",\n    features: [\n      \"Everything in Professional\",\n      \"Unlimited team cards\",\n      \"Spend approvals\",\n      \"Accounting integrations\",\n      \"Dedicated manager\",\n    ],\n    cta: \"Contact sales\",\n  },\n]\n\nexport function Pricing({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"pricing\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6\">\n        <SectionHeading\n          title=\"Pricing\"\n          description=\"Simple plans that grow with you. Cancel anytime.\"\n        />\n        <div className=\"mx-auto mt-12 grid max-w-md gap-6 lg:max-w-none lg:grid-cols-3\">\n          {plans.map((plan) => (\n            <div\n              key={plan.name}\n              className={cn(\n                \"flex flex-col gap-6 rounded-2xl border-2 border-border bg-background p-8\",\n                plan.featured &&\n                  \"border-primary shadow-[0_0_64px_color-mix(in_oklab,var(--primary)_16%,transparent)]\"\n              )}\n            >\n              <div className=\"flex items-center justify-between gap-4\">\n                <h3 className=\"text-2xl font-medium\">{plan.name}</h3>\n                {plan.featured && (\n                  <span className=\"rounded-full border border-primary/60 px-2.5 py-0.5 text-xs font-medium text-primary\">\n                    Best value\n                  </span>\n                )}\n              </div>\n              <p className=\"text-muted-foreground\">{plan.description}</p>\n              <p className=\"flex items-baseline gap-1\">\n                <span className=\"text-4xl font-medium tracking-tight\">\n                  {plan.price}\n                </span>\n                <span className=\"text-sm text-muted-foreground\">\n                  {plan.period}\n                </span>\n              </p>\n              <ul className=\"flex flex-1 flex-col gap-3\">\n                {plan.features.map((feature) => (\n                  <li key={feature} className=\"flex items-center gap-3\">\n                    <CheckIcon className=\"size-5 shrink-0 text-muted-foreground\" />\n                    {feature}\n                  </li>\n                ))}\n              </ul>\n              <Link\n                href={plan.name === \"Business\" ? \"/contact\" : \"/signup\"}\n                className={cn(\n                  buttonVariants({\n                    variant: plan.featured ? \"default\" : \"outline\",\n                    size: \"lg\",\n                  }),\n                  \"h-11 w-full text-base\"\n                )}\n              >\n                {plan.cta}\n              </Link>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "pricing",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

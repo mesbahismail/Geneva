@@ -1,0 +1,92 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme",
+  "title": "Geneva theme",
+  "description": "Deep navy surfaces with a sky-blue accent, in light and dark variants.",
+  "cssVars": {
+    "theme": {
+      "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+    },
+    "light": {
+      "radius": "0.75rem",
+      "background": "#ffffff",
+      "foreground": "#040d13",
+      "card": "#f6f9fb",
+      "card-foreground": "#040d13",
+      "popover": "#ffffff",
+      "popover-foreground": "#040d13",
+      "primary": "#0b7db8",
+      "primary-foreground": "#ffffff",
+      "secondary": "#eaf2f7",
+      "secondary-foreground": "#0a1e2b",
+      "muted": "#eef3f6",
+      "muted-foreground": "#4e606c",
+      "accent": "#e3eef5",
+      "accent-foreground": "#0a1e2b",
+      "destructive": "#dc2626",
+      "border": "#dce5eb",
+      "input": "#cfdbe3",
+      "ring": "#34b3f1",
+      "chart-1": "#34b3f1",
+      "chart-2": "#126ca8",
+      "chart-3": "#edb772",
+      "chart-4": "#f2555a",
+      "chart-5": "#8696a1",
+      "sidebar": "#f6f9fb",
+      "sidebar-foreground": "#040d13",
+      "sidebar-primary": "#0b7db8",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#e3eef5",
+      "sidebar-accent-foreground": "#0a1e2b",
+      "sidebar-border": "#dce5eb",
+      "sidebar-ring": "#34b3f1"
+    },
+    "dark": {
+      "background": "#040d13",
+      "foreground": "#ffffff",
+      "card": "#061620",
+      "card-foreground": "#ffffff",
+      "popover": "#091d29",
+      "popover-foreground": "#ffffff",
+      "primary": "#34b3f1",
+      "primary-foreground": "#050b0f",
+      "secondary": "#0f2d3f",
+      "secondary-foreground": "#ffffff",
+      "muted": "#0b1c27",
+      "muted-foreground": "#8696a1",
+      "accent": "#18242e",
+      "accent-foreground": "#ffffff",
+      "destructive": "#f87171",
+      "border": "#18242e",
+      "input": "#223644",
+      "ring": "#34b3f1",
+      "chart-1": "#34b3f1",
+      "chart-2": "#126ca8",
+      "chart-3": "#edb772",
+      "chart-4": "#f2555a",
+      "chart-5": "#8696a1",
+      "sidebar": "#061620",
+      "sidebar-foreground": "#ffffff",
+      "sidebar-primary": "#34b3f1",
+      "sidebar-primary-foreground": "#050b0f",
+      "sidebar-accent": "#18242e",
+      "sidebar-accent-foreground": "#ffffff",
+      "sidebar-border": "#18242e",
+      "sidebar-ring": "#34b3f1"
+    }
+  },
+  "css": {
+    "@keyframes geneva-gradient": {
+      "0%, 100%": {
+        "background-position": "0% 50%"
+      },
+      "50%": {
+        "background-position": "100% 50%"
+      }
+    }
+  },
+  "categories": [
+    "theme"
+  ],
+  "type": "registry:theme"
+}

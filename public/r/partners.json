@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "partners",
+  "title": "Partners",
+  "description": "Logo cloud with placeholder brand wordmarks.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/partners.tsx",
+      "content": "import {\n  AtomIcon,\n  BoxIcon,\n  CircleDotIcon,\n  HexagonIcon,\n  OrbitIcon,\n  SnowflakeIcon,\n  SunIcon,\n  TriangleIcon,\n  WavesIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Placeholder brands. Swap these for your customers' logos.\nconst partners = [\n  { name: \"Northwind\", icon: WavesIcon },\n  { name: \"Lumen\", icon: SunIcon },\n  { name: \"Vertex\", icon: TriangleIcon },\n  { name: \"Orbit\", icon: OrbitIcon },\n  { name: \"Quanta\", icon: AtomIcon },\n  { name: \"Helix\", icon: HexagonIcon },\n  { name: \"Polar\", icon: SnowflakeIcon },\n  { name: \"Cubic\", icon: BoxIcon },\n  { name: \"Focal\", icon: CircleDotIcon },\n]\n\nexport function Partners({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"partners\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-5xl px-4 sm:px-6\">\n        <h2 className=\"text-center text-2xl font-normal tracking-tight text-balance sm:text-3xl\">\n          Meet partners who are happily using our app\n        </h2>\n        <ul className=\"mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-8\">\n          {partners.map((partner) => (\n            <li\n              key={partner.name}\n              className=\"flex items-center gap-2 text-xl font-semibold tracking-tight text-muted-foreground/80 transition-colors hover:text-foreground\"\n            >\n              <partner.icon className=\"size-6\" strokeWidth={2} aria-hidden=\"true\" />\n              {partner.name}\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "logos",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

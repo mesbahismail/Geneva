@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer",
+  "title": "Footer",
+  "description": "Centered site footer with logo, links and copyright row.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/logo.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport function Logo({\n  className,\n  href = \"/\",\n}: {\n  className?: string\n  href?: string\n}) {\n  return (\n    <Link\n      href={href}\n      className={cn(\n        \"inline-flex items-center gap-2 text-2xl font-semibold tracking-tight text-foreground transition-opacity hover:opacity-90\",\n        className\n      )}\n    >\n      <svg\n        viewBox=\"0 0 24 24\"\n        aria-hidden=\"true\"\n        className=\"size-7 text-primary\"\n        fill=\"none\"\n      >\n        <rect width=\"24\" height=\"24\" rx=\"7\" fill=\"currentColor\" opacity=\"0.16\" />\n        <path\n          d=\"M16.5 8.25A5.25 5.25 0 1 0 17.25 12h-4.5\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2.25\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n        />\n      </svg>\n      Geneva\n    </Link>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/site-footer.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { Logo } from \"@/components/geneva/logo\"\n\nconst footerLinks = [\n  { label: \"About us\", href: \"/about\" },\n  { label: \"Contact us\", href: \"/contact\" },\n  { label: \"Terms of use\", href: \"/terms\" },\n]\n\nexport function SiteFooter() {\n  return (\n    <footer className=\"border-t border-border\">\n      <div className=\"mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6\">\n        <Logo className=\"text-3xl\" />\n        <nav className=\"flex flex-wrap justify-center gap-x-8 gap-y-3\">\n          {footerLinks.map((link) => (\n            <Link\n              key={link.href}\n              href={link.href}\n              className=\"text-sm font-medium text-muted-foreground transition-colors hover:text-foreground\"\n            >\n              {link.label}\n            </Link>\n          ))}\n        </nav>\n        <div className=\"flex w-full flex-col items-center justify-between gap-3 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row\">\n          <p>Designed with care by Ismail Mesbah</p>\n          <p>© 2026 Geneva. All rights reserved.</p>\n        </div>\n      </div>\n    </footer>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "footer",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

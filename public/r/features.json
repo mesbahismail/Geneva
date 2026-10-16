@@ -1,0 +1,47 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features",
+  "title": "Features",
+  "description": "Alternating feature rows with checklists and framed screenshots. Uses /geneva/analytics.jpg, my-cards.jpg and ai-chat-1.jpg.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/section-heading.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SectionHeading({\n  eyebrow,\n  title,\n  description,\n  className,\n}: {\n  eyebrow?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  className?: string\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex max-w-2xl flex-col items-center gap-4 text-center\",\n        className\n      )}\n    >\n      {eyebrow && (\n        <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n          {eyebrow}\n        </span>\n      )}\n      <h2 className=\"text-3xl font-normal tracking-tight text-balance sm:text-4xl md:text-5xl\">\n        {title}\n      </h2>\n      {description && (\n        <p className=\"text-base text-pretty text-muted-foreground sm:text-lg\">\n          {description}\n        </p>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/screen-frame.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * Product screenshot inside an animated gradient border.\n * Falls back to a skeleton dashboard when `src` is missing or fails to load,\n * so the block still looks right before you add your own screenshots.\n */\nexport function ScreenFrame({\n  src,\n  alt,\n  width = 1512,\n  height = 982,\n  priority = false,\n  tilt = true,\n  className,\n}: {\n  src?: string\n  alt: string\n  width?: number\n  height?: number\n  priority?: boolean\n  tilt?: boolean\n  className?: string\n}) {\n  const [failed, setFailed] = React.useState(false)\n\n  return (\n    <div\n      className={cn(\n        \"relative rounded-[1.75rem] bg-linear-45 from-primary/70 via-background to-primary/70 bg-[length:300%_300%] p-0.5 shadow-[0_0_96px_color-mix(in_oklab,var(--primary)_16%,transparent)] transition-[transform,box-shadow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] animate-geneva-gradient motion-reduce:animate-none\",\n        tilt &&\n          \"hover:shadow-[0_0_128px_color-mix(in_oklab,var(--primary)_32%,transparent)] hover:[transform:perspective(900px)_rotateX(3deg)_rotateY(2deg)] motion-reduce:hover:transform-none\",\n        className\n      )}\n    >\n      <div className=\"overflow-hidden rounded-[1.625rem] border-4 border-background bg-card sm:border-8\">\n        {src && !failed ? (\n          // eslint-disable-next-line @next/next/no-img-element\n          <img\n            src={src}\n            alt={alt}\n            width={width}\n            height={height}\n            loading={priority ? \"eager\" : \"lazy\"}\n            fetchPriority={priority ? \"high\" : \"auto\"}\n            onError={() => setFailed(true)}\n            className=\"block h-auto w-full\"\n          />\n        ) : (\n          <ScreenPlaceholder label={alt} ratio={width / height} />\n        )}\n      </div>\n    </div>\n  )\n}\n\nfunction ScreenPlaceholder({ label, ratio }: { label: string; ratio: number }) {\n  return (\n    <div\n      role=\"img\"\n      aria-label={label}\n      style={{ aspectRatio: ratio }}\n      className=\"grid w-full grid-cols-[18%_1fr] gap-3 bg-card p-3 sm:gap-4 sm:p-5\"\n    >\n      <div className=\"flex flex-col gap-2 rounded-xl bg-muted/60 p-3\">\n        <div className=\"mb-2 h-3 w-2/3 rounded-full bg-primary/40\" />\n        {Array.from({ length: 6 }).map((_, i) => (\n          <div key={i} className=\"h-2.5 w-full rounded-full bg-muted\" />\n        ))}\n      </div>\n      <div className=\"grid grid-rows-[auto_1fr_1fr] gap-3 sm:gap-4\">\n        <div className=\"h-4 w-1/3 rounded-full bg-muted\" />\n        <div className=\"grid grid-cols-3 gap-3 sm:gap-4\">\n          <div className=\"rounded-xl bg-muted/60\" />\n          <div className=\"col-span-2 flex items-end gap-1.5 rounded-xl bg-muted/60 p-3\">\n            {[40, 70, 55, 85, 45, 75, 60, 90, 50].map((h, i) => (\n              <div\n                key={i}\n                style={{ height: `${h}%` }}\n                className=\"flex-1 rounded-sm bg-primary/50\"\n              />\n            ))}\n          </div>\n        </div>\n        <div className=\"grid grid-cols-2 gap-3 sm:gap-4\">\n          <div className=\"rounded-xl bg-muted/60\" />\n          <div className=\"rounded-xl bg-muted/60\" />\n        </div>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/features.tsx",
+      "content": "import { CheckIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { ScreenFrame } from \"@/components/geneva/screen-frame\"\nimport { SectionHeading } from \"@/components/geneva/section-heading\"\n\nconst features = [\n  {\n    title: \"Analytics that explain themselves\",\n    description:\n      \"Income, spending and savings broken down by week, month or year. Geneva highlights what changed and why, so you never have to dig through spreadsheets again.\",\n    points: [\"Cash-flow forecasts\", \"Category trends\", \"Exportable reports\"],\n    image: \"/geneva/analytics.jpg\",\n  },\n  {\n    title: \"Virtual and physical cards\",\n    description:\n      \"Issue cards in seconds, set spending limits per card and freeze them with one tap. Perfect for subscriptions, travel or your whole team.\",\n    points: [\"Instant virtual cards\", \"Per-card limits\", \"One-tap freeze\"],\n    image: \"/geneva/my-cards.jpg\",\n  },\n  {\n    title: \"An assistant that knows your money\",\n    description:\n      \"Ask questions in plain language — “How much did I spend on travel this year?” — and get answers, charts and suggestions instantly.\",\n    points: [\"Natural-language search\", \"Smart suggestions\", \"Private by design\"],\n    image: \"/geneva/ai-chat-1.jpg\",\n  },\n]\n\nexport function Features({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"features\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6\">\n        <SectionHeading title=\"Features\" />\n        <div className=\"mt-16 flex flex-col gap-20 lg:gap-28\">\n          {features.map((feature, index) => (\n            <div\n              key={feature.title}\n              className=\"grid items-center gap-10 lg:grid-cols-2 lg:gap-20\"\n            >\n              <div className={cn(\"flex flex-col gap-4\", index % 2 === 1 && \"lg:order-last\")}>\n                <h3 className=\"text-2xl font-medium sm:text-3xl\">\n                  {feature.title}\n                </h3>\n                <p className=\"text-muted-foreground sm:text-lg\">\n                  {feature.description}\n                </p>\n                <ul className=\"mt-2 flex flex-col gap-3\">\n                  {feature.points.map((point) => (\n                    <li key={point} className=\"flex items-center gap-3\">\n                      <CheckIcon className=\"size-5 text-primary\" />\n                      {point}\n                    </li>\n                  ))}\n                </ul>\n              </div>\n              <ScreenFrame src={feature.image} alt={feature.title} />\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "cssVars": {
+    "theme": {
+      "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+    }
+  },
+  "css": {
+    "@keyframes geneva-gradient": {
+      "0%, 100%": {
+        "background-position": "0% 50%"
+      },
+      "50%": {
+        "background-position": "100% 50%"
+      }
+    }
+  },
+  "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+  "categories": [
+    "features",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

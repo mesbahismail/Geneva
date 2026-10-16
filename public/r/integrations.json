@@ -1,0 +1,51 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "integrations",
+  "title": "Integrations",
+  "description": "Tabbed integrations showcase with copy, CTA and framed screenshot per tab. Uses /geneva/wallet.jpg, send-1.jpg, transactions.jpg and documents-grid.jpg.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "tabs"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/section-heading.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SectionHeading({\n  eyebrow,\n  title,\n  description,\n  className,\n}: {\n  eyebrow?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  className?: string\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex max-w-2xl flex-col items-center gap-4 text-center\",\n        className\n      )}\n    >\n      {eyebrow && (\n        <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n          {eyebrow}\n        </span>\n      )}\n      <h2 className=\"text-3xl font-normal tracking-tight text-balance sm:text-4xl md:text-5xl\">\n        {title}\n      </h2>\n      {description && (\n        <p className=\"text-base text-pretty text-muted-foreground sm:text-lg\">\n          {description}\n        </p>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/screen-frame.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * Product screenshot inside an animated gradient border.\n * Falls back to a skeleton dashboard when `src` is missing or fails to load,\n * so the block still looks right before you add your own screenshots.\n */\nexport function ScreenFrame({\n  src,\n  alt,\n  width = 1512,\n  height = 982,\n  priority = false,\n  tilt = true,\n  className,\n}: {\n  src?: string\n  alt: string\n  width?: number\n  height?: number\n  priority?: boolean\n  tilt?: boolean\n  className?: string\n}) {\n  const [failed, setFailed] = React.useState(false)\n\n  return (\n    <div\n      className={cn(\n        \"relative rounded-[1.75rem] bg-linear-45 from-primary/70 via-background to-primary/70 bg-[length:300%_300%] p-0.5 shadow-[0_0_96px_color-mix(in_oklab,var(--primary)_16%,transparent)] transition-[transform,box-shadow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] animate-geneva-gradient motion-reduce:animate-none\",\n        tilt &&\n          \"hover:shadow-[0_0_128px_color-mix(in_oklab,var(--primary)_32%,transparent)] hover:[transform:perspective(900px)_rotateX(3deg)_rotateY(2deg)] motion-reduce:hover:transform-none\",\n        className\n      )}\n    >\n      <div className=\"overflow-hidden rounded-[1.625rem] border-4 border-background bg-card sm:border-8\">\n        {src && !failed ? (\n          // eslint-disable-next-line @next/next/no-img-element\n          <img\n            src={src}\n            alt={alt}\n            width={width}\n            height={height}\n            loading={priority ? \"eager\" : \"lazy\"}\n            fetchPriority={priority ? \"high\" : \"auto\"}\n            onError={() => setFailed(true)}\n            className=\"block h-auto w-full\"\n          />\n        ) : (\n          <ScreenPlaceholder label={alt} ratio={width / height} />\n        )}\n      </div>\n    </div>\n  )\n}\n\nfunction ScreenPlaceholder({ label, ratio }: { label: string; ratio: number }) {\n  return (\n    <div\n      role=\"img\"\n      aria-label={label}\n      style={{ aspectRatio: ratio }}\n      className=\"grid w-full grid-cols-[18%_1fr] gap-3 bg-card p-3 sm:gap-4 sm:p-5\"\n    >\n      <div className=\"flex flex-col gap-2 rounded-xl bg-muted/60 p-3\">\n        <div className=\"mb-2 h-3 w-2/3 rounded-full bg-primary/40\" />\n        {Array.from({ length: 6 }).map((_, i) => (\n          <div key={i} className=\"h-2.5 w-full rounded-full bg-muted\" />\n        ))}\n      </div>\n      <div className=\"grid grid-rows-[auto_1fr_1fr] gap-3 sm:gap-4\">\n        <div className=\"h-4 w-1/3 rounded-full bg-muted\" />\n        <div className=\"grid grid-cols-3 gap-3 sm:gap-4\">\n          <div className=\"rounded-xl bg-muted/60\" />\n          <div className=\"col-span-2 flex items-end gap-1.5 rounded-xl bg-muted/60 p-3\">\n            {[40, 70, 55, 85, 45, 75, 60, 90, 50].map((h, i) => (\n              <div\n                key={i}\n                style={{ height: `${h}%` }}\n                className=\"flex-1 rounded-sm bg-primary/50\"\n              />\n            ))}\n          </div>\n        </div>\n        <div className=\"grid grid-cols-2 gap-3 sm:gap-4\">\n          <div className=\"rounded-xl bg-muted/60\" />\n          <div className=\"rounded-xl bg-muted/60\" />\n        </div>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/integrations.tsx",
+      "content": "import Link from \"next/link\"\nimport { ChevronRightIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { buttonVariants } from \"@/components/ui/button\"\nimport { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\"\nimport { ScreenFrame } from \"@/components/geneva/screen-frame\"\nimport { SectionHeading } from \"@/components/geneva/section-heading\"\n\nconst integrations = [\n  {\n    value: \"banking\",\n    label: \"Banking\",\n    title: \"Connect 12,000+ banks\",\n    description:\n      \"Securely link your current, savings and credit accounts from banks around the world. Balances and transactions sync automatically, in real time.\",\n    image: \"/geneva/wallet.jpg\",\n  },\n  {\n    value: \"payments\",\n    label: \"Payments\",\n    title: \"Send and request money\",\n    description:\n      \"Pay friends, split bills or request payments with a link. Recipients don't need a Geneva account, and transfers land in seconds.\",\n    image: \"/geneva/send-1.jpg\",\n  },\n  {\n    value: \"accounting\",\n    label: \"Accounting\",\n    title: \"Sync with your accounting tools\",\n    description:\n      \"Push categorised transactions and receipts to your accounting software and close the books in minutes instead of days.\",\n    image: \"/geneva/transactions.jpg\",\n  },\n  {\n    value: \"documents\",\n    label: \"Documents\",\n    title: \"Every receipt, filed for you\",\n    description:\n      \"Upload invoices and receipts or forward them by email. Geneva reads them, matches them to transactions and keeps them searchable.\",\n    image: \"/geneva/documents-grid.jpg\",\n  },\n]\n\nexport function Integrations({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"integrations\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6\">\n        <SectionHeading title=\"Integrations\" />\n        <Tabs defaultValue={integrations[0].value} className=\"mt-10 items-center gap-12\">\n          <TabsList className=\"mx-auto h-auto flex-wrap justify-center gap-2 bg-transparent p-0\">\n            {integrations.map((item) => (\n              <TabsTrigger\n                key={item.value}\n                value={item.value}\n                className=\"h-9 flex-none rounded-lg border border-border px-4 text-sm text-muted-foreground hover:bg-accent data-[state=active]:border-foreground/40 data-[state=active]:bg-accent data-[state=active]:text-foreground data-active:border-foreground/40 data-active:bg-accent data-active:text-foreground\"\n              >\n                {item.label}\n              </TabsTrigger>\n            ))}\n          </TabsList>\n          {integrations.map((item) => (\n            <TabsContent key={item.value} value={item.value} className=\"w-full\">\n              <div className=\"grid items-center gap-10 lg:grid-cols-2 lg:gap-20\">\n                <div className=\"flex flex-col items-start gap-5\">\n                  <h3 className=\"text-2xl font-medium sm:text-3xl\">{item.title}</h3>\n                  <p className=\"text-base text-muted-foreground sm:text-lg\">\n                    {item.description}\n                  </p>\n                  <Link href=\"/signup\" className={cn(buttonVariants({ size: \"lg\" }), \"h-10 px-4\")}>\n                    Get started\n                    <ChevronRightIcon className=\"size-4\" />\n                  </Link>\n                </div>\n                <ScreenFrame src={item.image} alt={item.title} />\n              </div>\n            </TabsContent>\n          ))}\n        </Tabs>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "cssVars": {
+    "theme": {
+      "animate-geneva-gradient": "geneva-gradient 6s linear infinite"
+    }
+  },
+  "css": {
+    "@keyframes geneva-gradient": {
+      "0%, 100%": {
+        "background-position": "0% 50%"
+      },
+      "50%": {
+        "background-position": "100% 50%"
+      }
+    }
+  },
+  "docs": "Images: copy your screenshots to public/geneva/ (see the item description) or pass your own image paths. Missing screenshots fall back to a skeleton placeholder.",
+  "categories": [
+    "features",
+    "marketing"
+  ],
+  "type": "registry:block"
+}

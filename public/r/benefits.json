@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "benefits",
+  "title": "Benefits",
+  "description": "Six-up benefits grid with hairline dividers and icons.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/components/geneva/section-heading.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SectionHeading({\n  eyebrow,\n  title,\n  description,\n  className,\n}: {\n  eyebrow?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  className?: string\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex max-w-2xl flex-col items-center gap-4 text-center\",\n        className\n      )}\n    >\n      {eyebrow && (\n        <span className=\"rounded-full border border-primary/60 px-3 py-1 text-sm font-medium text-primary\">\n          {eyebrow}\n        </span>\n      )}\n      <h2 className=\"text-3xl font-normal tracking-tight text-balance sm:text-4xl md:text-5xl\">\n        {title}\n      </h2>\n      {description && (\n        <p className=\"text-base text-pretty text-muted-foreground sm:text-lg\">\n          {description}\n        </p>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/geneva/benefits.tsx",
+      "content": "import {\n  BellRingIcon,\n  GlobeIcon,\n  ShieldCheckIcon,\n  SparklesIcon,\n  TrendingUpIcon,\n  WalletIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { SectionHeading } from \"@/components/geneva/section-heading\"\n\nconst benefits = [\n  {\n    icon: SparklesIcon,\n    title: \"AI that works for you\",\n    description:\n      \"Smart categorisation and insights spot patterns in your spending before you do, so every decision is backed by data.\",\n  },\n  {\n    icon: WalletIcon,\n    title: \"All accounts, one place\",\n    description:\n      \"Connect banks, cards and wallets in minutes and see your complete financial picture in a single dashboard.\",\n  },\n  {\n    icon: ShieldCheckIcon,\n    title: \"Bank-grade security\",\n    description:\n      \"End-to-end encryption, biometric login and read-only connections keep your money and data safe at all times.\",\n  },\n  {\n    icon: TrendingUpIcon,\n    title: \"Goals that stick\",\n    description:\n      \"Set savings goals, track progress automatically and get nudges that help you reach them faster.\",\n  },\n  {\n    icon: BellRingIcon,\n    title: \"Real-time alerts\",\n    description:\n      \"Know instantly when bills are due, subscriptions renew or something looks unusual on your account.\",\n  },\n  {\n    icon: GlobeIcon,\n    title: \"Borderless payments\",\n    description:\n      \"Send money to anyone, anywhere, in more than 40 currencies with transparent, low fees.\",\n  },\n]\n\nexport function Benefits({ className }: { className?: string }) {\n  return (\n    <section\n      id=\"benefits\"\n      className={cn(\"scroll-mt-20 border-t border-border py-20\", className)}\n    >\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6\">\n        <SectionHeading title=\"Benefits\" />\n        <div className=\"mt-12 grid gap-px overflow-hidden bg-border sm:grid-cols-2 lg:grid-cols-3\">\n          {benefits.map((benefit) => (\n            <div key={benefit.title} className=\"bg-background p-8\">\n              <benefit.icon className=\"size-8 text-primary\" strokeWidth={1.5} />\n              <h3 className=\"mt-5 mb-2 text-lg font-medium\">{benefit.title}</h3>\n              <p className=\"text-muted-foreground\">{benefit.description}</p>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "features",
+    "marketing"
+  ],
+  "type": "registry:block"
+}
