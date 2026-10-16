@@ -2,6 +2,8 @@
 
 A free, open-source SaaS landing page template for **shadcn/ui**, built with Next.js, Tailwind CSS v4 and TypeScript. It ships as a [shadcn registry](https://ui.shadcn.com/docs/registry), so you can install the whole template or individual blocks straight into your project with the shadcn CLI.
 
+**Live demo:** [geneva-theta.vercel.app](https://geneva-theta.vercel.app) · **Blocks:** [geneva-theta.vercel.app/blocks](https://geneva-theta.vercel.app/blocks)
+
 - Landing page: header, hero, benefits, features, reviews, integrations, how it works, pricing, partners, FAQ and footer
 - Extra pages: login (magic link), sign up, about, contact and terms
 - Deep-navy theme with a sky-blue accent, in light and dark variants
@@ -25,7 +27,7 @@ npx shadcn@latest add @geneva/hero @geneva/pricing @geneva/faq
 
 Then add `className="dark"` to your `<html>` element for the original look.
 
-> Until the `@geneva` namespace is listed in the shadcn registry directory, install by URL instead, e.g. `npx shadcn@latest add https://<your-deployment>/r/hero.json`.
+> Until the `@geneva` namespace is listed in the shadcn registry directory, install by URL instead, e.g. `npx shadcn@latest add https://geneva-theta.vercel.app/r/hero.json`.
 
 ### Available items
 

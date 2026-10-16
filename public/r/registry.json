@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "geneva",
-  "homepage": "https://github.com/mesbahismail/Geneva",
+  "homepage": "https://geneva-theta.vercel.app",
   "items": [
     {
       "name": "template",
