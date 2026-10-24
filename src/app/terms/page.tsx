@@ -1,186 +1,40 @@
-"use client";
+import { Container, Stack, Typography } from '@mui/material';
 
-import * as React from "react";
-import { Box, Container, Stack, Link, Typography, Button } from "@mui/joy";
+export default function Page() {
+	return (
+		<Container maxWidth="md" sx={{ py: { xs: 5, md: 10 } }}>
+			<Stack spacing={3}>
+				<Stack spacing={1}>
+					<Typography variant="h2">{'Terms of Use'}</Typography>
+					<Typography color="textSecondary" variant="body1">
+						{'Last updated: 12 July 2025'}
+					</Typography>
+				</Stack>
+				<Typography>
+					{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia felis lorem, eget consectetur dui lacinia ac. Fusce ultrices nec libero in dapibus. Fusce condimentum diam vel eros cursus, eu vulputate magna commodo. Sed convallis lectus eget risus tincidunt accumsan. Sed faucibus viverra odio, quis sodales justo condimentum eu. `}
+				</Typography>
+				<Typography>
+					{`Nunc congue sed lorem commodo sodales. Suspendisse a tristique tellus. Maecenas porta quam elit, vitae tristique nisl viverra quis. Integer sit amet sapien id urna rhoncus lobortis. Cras tincidunt dui vel posuere eleifend. Vivamus finibus velit non varius convallis. 
+Aliquam dignissim ultricies velit. Sed eros lectus, imperdiet sit amet nisi vel, elementum consequat massa. Nam augue justo, condimentum nec blandit id, blandit at eros. Quisque vel augue eu quam faucibus mattis.`}
+				</Typography>
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+				<Typography>
+					{`Fusce commodo massa in lacus facilisis laoreet. Ut at feugiat sem. Fusce a elit eu urna hendrerit mattis. In venenatis nulla diam, vitae rhoncus massa lacinia a. Sed ornare, ex id sodales luctus, turpis purus tincidunt urna, at dapibus dui ante eu lacus. Aliquam ut tempus ante. Donec consequat, velit quis cursus laoreet, metus massa feugiat sapien, sodales commodo erat mi sed libero.
+Suspendisse sit amet feugiat est, at commodo erat. Curabitur convallis pharetra ex, et condimentum justo pretium sit amet. Vestibulum felis eros, cursus at pretium in, auctor ac tellus. Nunc eget orci consequat, mollis justo vitae, condimentum ex. Praesent nec ex porta eros mattis tempor. Quisque bibendum lobortis euismod. `}
+				</Typography>
 
-import { TbMail } from "react-icons/tb";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+				<Typography>
+					{`Suspendisse eleifend finibus tortor, a euismod turpis tincidunt sed. Phasellus pellentesque ex a orci blandit iaculis. In erat elit, vestibulum ac magna at, luctus ornare mi. Donec ut ipsum at nisi facilisis ultrices. Aliquam erat volutpat. Vestibulum leo ligula, mattis eget elit a, commodo eleifend nisi. Pellentesque euismod, lorem et facilisis volutpat, odio quam congue nisi, eu faucibus est nulla vel nunc. Aliquam dapibus malesuada metus vel finibus.`}
+				</Typography>
 
-export default function AboutPage() {
-  const [isScrolled, setIsScrolled] = React.useState(false);
+				<Typography>
+					{`Donec enim turpis, iaculis quis nibh sed, eleifend venenatis leo. Aenean vitae odio dignissim, consectetur justo vitae, volutpat odio. Fusce vel orci sed justo pellentesque convallis. Quisque enim odio, fringilla non odio a, fermentum porta tortor.`}
+				</Typography>
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      setIsScrolled(offset > 10); // Adjust the threshold as needed
-    };
-
-    // Add event listener with passive option for better performance
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const [isAtStart, setIsAtStart] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const checkScrollPosition = () => {
-    if (!containerRef.current) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-    const tolerance = 5; // Pixel tolerance for edge detection
-
-    setIsAtStart(scrollLeft <= tolerance);
-    setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - tolerance);
-  };
-
-  useEffect(() => {
-    if (!containerRef.current?.style.scrollBehavior) {
-      containerRef.current?.style.setProperty(
-        "scroll-behavior",
-        "smooth",
-        "important"
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    const currentContainer = containerRef.current;
-    // Initial check with timeout to ensure layout
-    setTimeout(checkScrollPosition, 100);
-
-    currentContainer?.addEventListener("scroll", checkScrollPosition);
-    checkScrollPosition();
-    return () => {
-      currentContainer?.removeEventListener("scroll", checkScrollPosition);
-    };
-  }, []);
-
-  return (
-    <Box
-      sx={{
-        bgcolor: "#040D13",
-        minHeight: "100vh",
-      }}
-    >
-      {/* Cover light - Positioned before header */}
-      <Box
-        sx={{
-          position: "absolute",
-          width: "1000px",
-          height: "600px",
-          borderRadius: "50%",
-          backgroundColor: "rgba(20, 52, 73, 0.56)",
-          filter: "blur(500px)",
-          zIndex: 0,
-          // Position 200px above header start
-          top: "-200px",
-          left: "50%",
-          transform: "translateX(-50%)",
-        }}
-      />
-
-      <Container
-        disableGutters
-        sx={{
-          maxWidth: "1384px",
-          position: "relative",
-        }}
-      >
-        {/* Header Section */}
-        <Header />
-
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={12.5}
-          sx={{ pb: 6, pt: 4 }}
-        >
-          <Stack
-            spacing={3}
-            sx={{
-              width: "600px",
-            }}
-          >
-            <Box
-              sx={{
-                m: 2,
-                border: "1px solid #34B3F1",
-                borderRadius: "20px",
-                padding: "4px 12px",
-                display: "inline-block",
-                maxWidth: "max-content",
-              }}
-            >
-              <Typography
-                level="body-sm"
-                fontWeight="500"
-                sx={{ color: "#34B3F1" }}
-              >
-                About us
-              </Typography>
-            </Box>
-            <Stack spacing={1.5}>
-              <Typography level="h1" fontWeight={400} sx={{ color: "#ffffff" }}>
-                We control our world one line at a time.{" "}
-              </Typography>
-              <Typography sx={{ color: "#8696A1" }}>
-                Etiam vestibulum fringilla nibh, at faucibus diam maximus
-                tincidunt. Vivamus iaculis consectetur ultricies. Nam volutpat
-                turpis ut augue euismod, vel vulputate lorem vehicula. Ut
-                vestibulum eu sem et laoreet. Fusce dui felis, consectetur ac mi
-                quis, blandit viverra libero. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Sed id fermentum lectus, at
-                sagittis velit. Quisque pharetra lacus vel enim porta malesuada.
-              </Typography>
-            </Stack>
-            <Button
-              color="primary"
-              variant="solid"
-              startDecorator={<TbMail size={20} />}
-              sx={{
-                width: "fit-content",
-                minWidth: "auto",
-              }}
-            >
-              Contact us
-            </Button>
-          </Stack>
-          <Box
-            sx={{
-              width: "640px",
-              height: "560px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              overflow: "hidden",
-              borderRadius: "20px",
-            }}
-          >
-            <Image
-              src="/about.jpg"
-              alt="about"
-              width={640}
-              height={560}
-              style={{
-                display: "block",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // Ensures the image covers the box without stretching
-                borderRadius: "20px",
-              }}
-            />
-          </Box>
-        </Stack>
-
-        {/* Footer Section */}
-        <Footer />
-      </Container>
-    </Box>
-  );
+				<Typography>
+					{`Fusce malesuada, risus vel mollis dapibus, libero turpis congue quam, eu consequat erat velit at sem. Cras eget venenatis lectus. Suspendisse tempor, orci vitae mattis molestie, eros est interdum libero, quis maximus erat massa sit amet leo. Aliquam felis risus, fermentum et magna vel, placerat semper eros. Sed eu odio et diam tristique tincidunt. Quisque egestas ligula sed risus lacinia iaculis. Suspendisse justo velit, tempus ut dictum ac, consectetur a purus.`}
+				</Typography>
+			</Stack>
+		</Container>
+	);
 }

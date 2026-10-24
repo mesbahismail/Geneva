@@ -1,17 +1,55 @@
-import * as React from "react";
-import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
+import type { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import { Mona_Sans } from 'next/font/google';
+import './globals.css';
 
-export const metadata = {
-  title: "Geneva",
-  description: "SaaS Landing Page",
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { ThemeProvider } from '@mui/material/styles';
+
+import { Box } from '@mui/material';
+
+import { Providers } from '@/providers';
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
+import theme from '@/theme';
+
+import Header from '@/components/sections/header';
+import Footer from '@/components/sections/footer';
+
+const monaSans = Mona_Sans({
+	variable: '--font-mona-sans',
+	subsets: ['latin'],
+});
+
+export const metadata: Metadata = {
+	title: 'Geneva — a ready-to-launch SaaS landing page by ThemeFellas.',
+	description:
+		'aunch your SaaS product with Geneva — a responsive, high-converting landing page template built with Next.js, MUI and Tailwind CSS by ThemeFellas.',
 };
 
-export default function RootLayout(props: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <ThemeRegistry>{props.children}</ThemeRegistry>
-      </body>
-    </html>
-  );
+export default function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
+	return (
+		<html lang="en" suppressHydrationWarning>
+			{process.env.NODE_ENV === 'production' && (
+				<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} />
+			)}
+			<body className={`${monaSans.variable} antialiased`}>
+				<AppRouterCacheProvider>
+					<ThemeProvider theme={theme} defaultMode="dark">
+						<InitColorSchemeScript attribute="class" />
+						<Providers>
+							<Box sx={{ position: 'relative', zIndex: 2 }}>
+								<Header />
+								{children}
+								<Footer />
+							</Box>
+						</Providers>
+					</ThemeProvider>
+				</AppRouterCacheProvider>
+			</body>
+		</html>
+	);
 }
