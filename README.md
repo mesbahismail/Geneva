@@ -646,7 +646,7 @@ For questions about customizing this template:
 
 ## 📄 License
 
-This template is provided as-is for your SaaS projects. Customize and deploy as needed for your business.
+Free for personal and commercial projects. No resale or redistribution. See [LICENSE](LICENSE).
 
 ---
 
