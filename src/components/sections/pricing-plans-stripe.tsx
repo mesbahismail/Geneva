@@ -130,7 +130,7 @@ export default function PricingPlans() {
 										value={planType}
 									>
 										<ToggleButton value="monthly">
-											<Box sx={{ px: { md: 3.25 } }}>{`Monthly`}</Box>
+											<Box>{`Monthly`}</Box>
 										</ToggleButton>
 										<ToggleButton value="yearly">
 											<Stack direction="row" alignItems="center" spacing={1}>

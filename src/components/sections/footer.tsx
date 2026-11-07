@@ -133,14 +133,8 @@ export default function Footer() {
 				<Button
 					color="secondary"
 					onClick={handleToTop}
-					size="small"
 					startIcon={<IconTop />}
 					sx={[
-						() => ({
-							pl: 2,
-							pr: 2.5,
-							py: 1,
-						}),
 						(theme) =>
 							theme.applyStyles('light', {
 								background: `#f1f1f1`,

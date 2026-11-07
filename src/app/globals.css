@@ -1,5 +1,18 @@
 @import 'tailwindcss';
 
+html {
+	/* Scale every page and body-mounted dialog to 80% of the template size. */
+	zoom: 0.8;
+	scroll-behavior: smooth;
+	scroll-padding-top: 128px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
 body {
 	font-family: var(--font-mona-sans), Arial, Helvetica, sans-serif;
 	padding: 0;

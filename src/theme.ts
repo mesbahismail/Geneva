@@ -1,5 +1,6 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
+import { buttonSizes, buttonSizeStyles } from '@/lib/button-sizes';
 
 declare module '@mui/material/styles' {
 	interface Palette {
@@ -157,9 +158,16 @@ theme = createTheme(theme, {
 		MuiButton: {
 			defaultProps: {
 				variant: 'contained',
+				size: 'medium',
 			},
 			styleOverrides: {
 				root: {
+					...buttonSizeStyles,
+					minWidth: buttonSizes.minWidth,
+					'& .MuiButton-startIcon > *, & .MuiButton-endIcon > *': {
+						width: buttonSizes.icon,
+						height: buttonSizes.icon,
+					},
 					boxShadow:
 						'0px 4px 12px 0px rgba(0, 0, 0, 0.10), 0px 24px 40px 0px rgba(0, 0, 0, 0.12)',
 					borderRadius: '50vh',
@@ -184,12 +192,21 @@ theme = createTheme(theme, {
 						}),
 					},
 				},
-				sizeMedium: {
-					fontSize: 20,
-					height: 56,
-					paddingTop: 2,
-					paddingLeft: 24,
-					paddingRight: 24,
+				sizeSmall: buttonSizeStyles,
+				sizeMedium: buttonSizeStyles,
+				sizeLarge: buttonSizeStyles,
+			},
+		},
+		MuiIconButton: {
+			styleOverrides: {
+				root: {
+					width: buttonSizes.height,
+					height: buttonSizes.height,
+					flexShrink: 0,
+					'& svg': {
+						width: buttonSizes.icon,
+						height: buttonSizes.icon,
+					},
 				},
 			},
 		},
@@ -304,12 +321,22 @@ theme = createTheme(theme, {
 				},
 			},
 		},
+		MuiToggleButtonGroup: {
+			styleOverrides: {
+				root: {
+					width: buttonSizes.minWidth * 2,
+					maxWidth: '100%',
+					'& .MuiToggleButton-root': { flex: 1, minWidth: 0 },
+				},
+			},
+		},
 		MuiToggleButton: {
 			defaultProps: {
 				variant: 'contained',
 			},
 			styleOverrides: {
 				root: {
+					...buttonSizeStyles,
 					backgroundColor: 'transparent',
 					borderColor: '#0E21A0',
 					borderWidth: 2,
@@ -347,10 +374,7 @@ theme = createTheme(theme, {
 					'&.MuiButton-containedSecondary': {
 						borderTop: '2px solid #555',
 					},
-					fontSize: 20,
-					height: 56,
-					paddingLeft: 24,
-					paddingRight: 24,
+					...buttonSizeStyles,
 					...theme.applyStyles('dark', {
 						'&.MuiButton-containedPrimary': {
 							borderTop: '2px solid #FFF',

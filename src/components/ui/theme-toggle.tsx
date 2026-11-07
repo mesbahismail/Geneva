@@ -6,6 +6,7 @@ import {
 } from '@tabler/icons-react';
 
 import { useColorScheme } from '@mui/material/styles';
+import { buttonSizes } from '@/lib/button-sizes';
 
 export default function ThemeToggle() {
 	const { mode, setMode } = useColorScheme();
@@ -21,6 +22,8 @@ export default function ThemeToggle() {
 	return (
 		<Box
 			component="button"
+			type="button"
+			aria-label="Toggle color theme"
 			onClick={handleChange}
 			sx={[
 				{
@@ -31,7 +34,9 @@ export default function ThemeToggle() {
 					cursor: 'pointer',
 					display: 'flex',
 					flexDirection: 'row',
-					height: 56,
+					height: buttonSizes.height,
+					flexShrink: 0,
+					'& svg': { width: buttonSizes.icon, height: buttonSizes.icon },
 					justifyContent: 'space-between',
 					position: 'relative',
 					p: 1,

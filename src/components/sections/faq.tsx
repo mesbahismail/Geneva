@@ -12,6 +12,7 @@ import {
 import { IconPlus as IconExpand } from '@tabler/icons-react';
 import { Card } from '@/components/ui/card';
 import RevealSection from '@/components/ui/reveal-section';
+import { buttonSizes } from '@/lib/button-sizes';
 
 // Put Section Headline here
 const headline = `FAQ`;
@@ -108,10 +109,14 @@ function FaqItem({ question, answer }: Item) {
 					<Typography variant="h5">{question}</Typography>
 					<Button
 						color="secondary"
+						aria-label={open ? `Collapse ${question}` : `Expand ${question}`}
+						aria-expanded={open}
 						onClick={() => setOpen(!open)}
 						sx={{
-							px: 2,
-							minWidth: 'auto',
+							p: 0,
+							width: buttonSizes.height,
+							minWidth: buttonSizes.height,
+							flexShrink: 0,
 							transform: open ? 'rotate(225deg)' : 'rotate(0deg)',
 							transition: 'transform 0.3s ease-in-out',
 						}}

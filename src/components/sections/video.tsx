@@ -134,7 +134,8 @@ export default function Video() {
 									zIndex: 2,
 								}}
 							>
-								<Box
+								<IconButton
+									aria-label="Play video"
 									onClick={handleOpen}
 									sx={{
 										backgroundColor: 'accent.main',
@@ -142,20 +143,15 @@ export default function Video() {
 										boxShadow:
 											'0px 4px 12px 0px rgba(0, 0, 0, 0.10), 0px 24px 40px 0px rgba(0, 0, 0, 0.12)',
 										color: '#10101E',
-										p: { xs: 2, md: 5 },
 										transition: 'transform 0.3s ease-in-out',
 										cursor: 'pointer',
 										'&:hover': {
 											transform: 'scale(1.1)',
 										},
-										'& svg': {
-											height: { xs: 32, md: 72 },
-											width: { xs: 32, md: 72 },
-										},
 									}}
 								>
 									<IconPlay />
-								</Box>
+								</IconButton>
 							</Box>
 						</Card>
 					</RevealSection>
